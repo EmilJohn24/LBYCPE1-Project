@@ -1,11 +1,10 @@
-import java.sql.Time;
-import java.util.ArrayList;
+package Backend.Session;
+
 import java.util.Date;
 import java.util.Hashtable;
 
 
 class RoomSlot {
-    int student_count;
 
 }
 
