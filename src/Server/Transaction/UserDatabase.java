@@ -1,11 +1,10 @@
-package Server.Session;
+package Server.Transaction;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
 
 public class UserDatabase {
@@ -21,6 +20,11 @@ public class UserDatabase {
         catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean inDatabase(String username,
+                              String password){
+        return users.get(username).equals(password);
     }
 
 
