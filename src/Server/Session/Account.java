@@ -1,4 +1,4 @@
-package Backend.Session;
+package Server.Session;
 
 public class Account {
     static public Account login(String user, String password){

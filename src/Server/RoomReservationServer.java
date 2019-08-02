@@ -1,4 +1,4 @@
-package Backend;
+package Server;
 
 public class RoomReservationServer {
     public static void main(String[] args){
