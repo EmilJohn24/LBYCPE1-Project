@@ -5,8 +5,6 @@ public class Account {
         return new Account(user, password);
     }
 
-
-
     private int id_number;
 
     Account(String user, String password){
