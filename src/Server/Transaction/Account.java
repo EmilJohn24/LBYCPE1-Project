@@ -6,7 +6,6 @@ public class Account {
     static public Account login(String _user,
                                 String password,
                                 UserDatabase data){
-
         if (data.inDatabase(_user, password))
             return new Account(_user);
         else return null;
