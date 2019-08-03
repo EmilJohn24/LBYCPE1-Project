@@ -3,8 +3,9 @@ package Server.Transaction;
 import java.util.Date;
 import java.util.Hashtable;
 
-//Room File Format:
-// ~[Building ID] [Floor] [X] [Y] [Vertex Info] [Starting Time HH:MM] [Minute Intervals for Reservations]
+// Room File Format:
+// Directory: Building/Floor/
+// ~[X] [Y] [Vertex Info] [Starting Time HH:MM] [Minute Intervals for Reservations]
 // [Interval Counts from Starting Time] [Username]
 class RoomSlot {
     private Account client;
