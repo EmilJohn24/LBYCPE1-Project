@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e11c333f-7a24-4967-a1a4-0fdde66529ef" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Server/Structures/StructureParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/Structures/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/Structures/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/Structures/Floor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/Structures/Floor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server/Structures/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/Structures/Room.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +95,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
