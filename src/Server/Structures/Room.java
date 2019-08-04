@@ -2,11 +2,8 @@ package Server.Structures;
 
 import Server.Transaction.*;
 import acm.graphics.GPolygon;
+import acm.graphics.GRect;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
 import java.util.Hashtable;
 
@@ -21,22 +18,63 @@ class RoomSlot {
 public class Room {
     private int capacity;
     private Hashtable<Date, RoomSlot> slots; //associates dates to rooms
-    private GPolygon graphic;
-    private PrintWriter out;
-    private BufferedReader in;
+    private GRect graphic;
+    private String name;
+    private String description;
+    private double top;
+    private double left;
+    private double width;
+    private double height;
 
-    public GPolygon getPolygonReference(){
+    public GRect getGraphic(){
         return graphic;
     }
 
-    Room(int capacity, String infoFile) throws IOException {
+    Room(String name, String description, int capacity, double top, double left, double width, double height){
         this.capacity = capacity;
-        this.in = new BufferedReader(new FileReader(infoFile));
-        this.out = new PrintWriter(infoFile);
-    }
-    //TODO: Load data from file to slots
-    private void loadData(){
-        return;
+        this.description = description;
+        this.name = name;
+        this.top = top;
+        this.left = left;
+        this.width = width;
+        this.height = height;
+        graphic = new GRect(left, top, width, height);
+
     }
 
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+        graphic.setSize(graphic.getWidth(), height);
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+        graphic.setSize(width, graphic.getHeight());
+    }
+
+    public double getLeft() {
+        return left;
+    }
+
+    public void setLeft(double left) {
+        this.left = left;
+        graphic.setX(left);
+    }
+
+    public double getTop() {
+        return top;
+    }
+
+    public void setTop(double top) {
+        this.top = top;
+        graphic.setY(top);
+    }
 }
