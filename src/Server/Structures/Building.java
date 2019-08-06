@@ -22,6 +22,23 @@ public class Building {
         graphic = new GRect(left, top, width, height);
     }
 
+    Building(){
+        this.name = "";
+        this.top = 0;
+        this.left = 0;
+        this.height = 0;
+        this.width = 0;
+        graphic = new GRect(this.left, this.top, this.width, this.height);
+    }
+
+    public void addFloor(Floor newFloor){
+        floors.add(newFloor);
+    }
+
+    public void createFloor(int floorCount, int height, int width){
+        addFloor(new Floor(floorCount, width, height));
+    }
+
 
     public GRect getGraphic() {
         return graphic;
@@ -61,6 +78,10 @@ public class Building {
     public void setTop(double top) {
         this.top = top;
         graphic.setY(top);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
 
