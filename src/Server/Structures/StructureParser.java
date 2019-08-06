@@ -91,10 +91,16 @@ public class StructureParser {
     private void chuckFloors(Building newBuilding, NodeList floors){
         for (int fCount = 0; fCount < floors.getLength(); fCount++){
             Element currentFloor = (Element) floors.item(fCount);
+
             int floorCount = getElementAsInt(currentFloor, "number");
             int width = getElementAsInt(currentFloor, "width");
             int height = getElementAsInt(currentFloor, "height");
-            newBuilding.createFloor(floorCount, width, height);
+
+            Floor newFloor = new Floor(floorCount, width, height);
+            chuckRooms(newFloor,
+                    currentFloor.getElementsByTagName(roomIndicator));
+            newBuilding.addFloor(newFloor);
+
         }
     }
 
@@ -105,8 +111,9 @@ public class StructureParser {
             newRoom.setName(currentRoom.getAttribute("name"));
             resizeStructWithXMLAttribs(newRoom, currentRoom);
             Element descriptor = (Element) currentRoom.
-                        getElementsByTagName("description").item(0);
+                        getElementsByTagName(descriptionIndicator).item(0);
             newRoom.setDescription(descriptor.getNodeValue());
+            newFloor.addRoom(newRoom);
 
 
         }
