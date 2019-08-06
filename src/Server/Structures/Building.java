@@ -4,7 +4,7 @@ import acm.graphics.GRect;
 
 import java.util.ArrayList;
 
-public class Building {
+public class Building implements ResizableStruct{
     private String name;
     private ArrayList<Floor> floors;
     private double top;

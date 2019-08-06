@@ -15,7 +15,7 @@ class RoomSlot {
     private Account client;
 }
 
-public class Room {
+public class Room implements ResizableStruct{
     private int capacity;
     private Hashtable<Date, RoomSlot> slots; //associates dates to rooms
     private GRect graphic;
@@ -31,6 +31,7 @@ public class Room {
     }
 
     Room(String name, String description, int capacity, double top, double left, double width, double height){
+        this.name = name;
         this.capacity = capacity;
         this.description = description;
         this.name = name;
@@ -40,6 +41,10 @@ public class Room {
         this.height = height;
         graphic = new GRect(left, top, width, height);
 
+    }
+
+    Room(){
+        return;
     }
 
     public double getHeight() {
@@ -76,5 +81,13 @@ public class Room {
     public void setTop(double top) {
         this.top = top;
         graphic.setY(top);
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
