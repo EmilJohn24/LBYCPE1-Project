@@ -6,11 +6,13 @@ import java.util.ArrayList;
 
 public class Floor {
     private ArrayList<Room> rooms;
+    private int floorCount;
     private GCanvas floor;
     private int width;
     private int height;
 
-    Floor(int width, int height){
+    Floor(int floorCount, int width, int height){
+        this.floorCount = floorCount;
         this.width = width;
         this.height = height;
         floor = new GCanvas();
@@ -21,7 +23,8 @@ public class Floor {
         floor.add(newRoom.getGraphic());
     }
 
-    public void createRoom(String name, String description, int capacity, double top, double left, double width, double height){
+    public void createRoom(String name, String description, int capacity,
+                           double top, double left, double width, double height){
         addRoom(new Room(name, description, capacity,
                         top, left, width, height));
     }
