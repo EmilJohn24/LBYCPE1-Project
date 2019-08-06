@@ -4,6 +4,7 @@ import Server.Transaction.*;
 import acm.graphics.GPolygon;
 import acm.graphics.GRect;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Hashtable;
 
@@ -17,7 +18,7 @@ class RoomSlot {
 
 public class Room implements ResizableStruct{
     private int capacity;
-    private Hashtable<Date, RoomSlot> slots; //associates dates to rooms
+    private Hashtable<Calendar, RoomSlot> slots; //associates dates to rooms
     private GRect graphic;
     private String name;
     private String description;
@@ -46,6 +47,14 @@ public class Room implements ResizableStruct{
     Room(){
         return;
     }
+
+    public void addEmptySlot(int month, int day, int year, int hour, int minute){
+        Calendar newDate = Calendar.getInstance();
+        newDate.set(year, month, day, hour, minute);
+        RoomSlot newSlot = new RoomSlot();
+        slots.put(newDate, newSlot);
+    }
+
 
     public double getHeight() {
         return height;
