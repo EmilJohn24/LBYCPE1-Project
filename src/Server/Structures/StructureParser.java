@@ -51,16 +51,24 @@ public class StructureParser {
         }
     }
 
-    private void chuckFloors(Building currentBuilding){
 
-    }
 
     public static double getElementAsDouble(Element e, String attr){
-        return Double.valueOf(e.getAttribute(attr));
+        return Double.parseDouble(e.getAttribute(attr));
+    }
+
+    public static int getElementAsInt(Element e, String attr){
+        return Integer.parseInt(e.getAttribute(attr));
+    }
+
+    public void resizeStructWithXMLAttribs(ResizableStruct rs, Element xmlElem){
+        rs.setTop(getElementAsDouble(xmlElem,"top"));
+        rs.setLeft(getElementAsDouble(xmlElem, "left"));
+        rs.setHeight(getElementAsDouble(xmlElem, "height"));
+        rs.setWidth(getElementAsDouble(xmlElem, "width"));
     }
 
     public ArrayList<Building> parse(){
-
         ArrayList<Building> buildingList = new ArrayList<>();
         //top-level breakdown
 
@@ -69,14 +77,38 @@ public class StructureParser {
             Building newBuilding = new Building();
             Element currentBuilding = (Element) buildingNodes.item(bCount);
             newBuilding.setName(currentBuilding.getAttribute("name"));
-            newBuilding.setTop(getElementAsDouble(currentBuilding,"top"));
-            newBuilding.setLeft(getElementAsDouble(currentBuilding, "left"));
-            newBuilding.setHeight(getElementAsDouble(currentBuilding, "height"));
-            newBuilding.setWidth(getElementAsDouble(currentBuilding, "width"));
-            
+            resizeStructWithXMLAttribs(newBuilding, currentBuilding);
+
+            chuckFloors(newBuilding,
+                    currentBuilding.getElementsByTagName(floorIndicator));
+
+            buildingList.add(newBuilding);
+        }
+
+        return buildingList;
+    }
+
+    private void chuckFloors(Building newBuilding, NodeList floors){
+        for (int fCount = 0; fCount < floors.getLength(); fCount++){
+            Element currentFloor = (Element) floors.item(fCount);
+            int floorCount = getElementAsInt(currentFloor, "number");
+            int width = getElementAsInt(currentFloor, "width");
+            int height = getElementAsInt(currentFloor, "height");
+            newBuilding.createFloor(floorCount, width, height);
+        }
+    }
+
+    private void chuckRooms(Floor newFloor, NodeList rooms){
+        for (int rCount = 0; rCount < rooms.getLength(); rCount++){
+            Element currentRoom = (Element) rooms.item(rCount);
+            Room newRoom = new Room();
+            newRoom.setName(currentRoom.getAttribute("name"));
+            resizeStructWithXMLAttribs(newRoom, currentRoom);
+            Element descriptor = (Element) currentRoom.
+                        getElementsByTagName("description").item(0);
+            newRoom.setDescription(descriptor.getNodeValue());
 
 
         }
-        return buildingList;
     }
 }
