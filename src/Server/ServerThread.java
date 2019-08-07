@@ -1,5 +1,8 @@
 package Server;
 
+import Server.Transaction.SessionManager;
+
+import javax.security.auth.login.FailedLoginException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,6 +14,7 @@ public class ServerThread extends Thread{
     private Socket _socket;
     PrintWriter output;
     BufferedReader input;
+    Integer sessionID;
     public ServerThread(Socket socket) throws IOException{
         super("Thread::" + socket.getInetAddress());
         this._socket = socket;
@@ -22,11 +26,25 @@ public class ServerThread extends Thread{
 
 
     //handles requests from the client. For now, it simply displays them as messages.
+    //Request Format:
+    //[REQUEST_TYPE]:PARAMS
+    //Normal Types:
+    //LOGIN:[username],[password]
+    //GET_ROOM_DATA
+    //RESERVE
     private void process(String request){
+
         ServerLog.globalLog("Message: " + request);
     }
 
 
+    private void loginRequestHandler(String username, String password){
+        try {
+            sessionID = SessionManager.login(username, password);
+        } catch (FailedLoginException e) {
+            output.println("LOGIN_FAILED");
+        }
+    }
     public void start(){
         String request;
         try {
