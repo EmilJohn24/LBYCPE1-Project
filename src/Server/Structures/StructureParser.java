@@ -40,7 +40,7 @@ public class StructureParser {
     private final String descriptionIndicator = "description";
     private final String dateIndicator = "date";
     private final String slotIndicator = "slot";
-    StructureParser(String fileName, UserDatabase users) throws ParserConfigurationException,
+    public StructureParser(String fileName, UserDatabase users) throws ParserConfigurationException,
                                     IOException, SAXException {
         this.tempDatabase = users;
         structureFile = new File(fileName);
@@ -136,9 +136,10 @@ public class StructureParser {
                 Element currentSlot = (Element) daySlots.item(sCount);
                 int hour = getElementAsInt(currentSlot, "hour");
                 int minute = getElementAsInt(currentSlot, "minute");
-                String username = currentSlot.getNodeValue();
+                String username = currentDate.getTextContent().trim();
                 Account transientLogin = Account.pseudoLogin(username, tempDatabase);
-                if (!username.isEmpty()) newRoom.fillSlot(transientLogin, month, day, year, hour, minute);
+
+                if (transientLogin != null) newRoom.fillSlot(transientLogin, month, day, year, hour, minute);
                 else newRoom.addEmptySlot(month, day, year, hour, minute);
             }
         }
