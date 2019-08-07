@@ -28,14 +28,15 @@ public class UserDatabase {
     }
 
     public boolean presentInDataBase(String username){
-        return users.containsKey(username);
+       // System.out.println(users.values()); //TODO: Remove checker
+        return users.containsKey(username.trim());
     }
 
 
 
     //static stuff
 
-    static private final String userFileSeparator = "|";
+    static private final String userFileSeparator = "!";
 
     static private HashMap<String, String>
                 databaseParse(BufferedReader data){
