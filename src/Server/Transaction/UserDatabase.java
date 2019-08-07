@@ -14,7 +14,7 @@ public class UserDatabase {
 
     public UserDatabase(String filename){
         try {
-            file = new BufferedReader(new FileReader(filename));
+            file = new BufferedReader(new FileReader(filename)); //TODO: change to remote file, i.e. make access indirect
             users = databaseParse(file);
         }
         catch (FileNotFoundException e) {
@@ -25,6 +25,10 @@ public class UserDatabase {
     public boolean inDatabase(String username,
                               String password){
         return users.get(username).equals(password);
+    }
+
+    public boolean presentInDataBase(String username){
+        return users.containsKey(username);
     }
 
 
