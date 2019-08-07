@@ -3,12 +3,17 @@ package Server.Transaction;
 public class Account {
     private String user;
     private boolean passiveState;
-
+    public String getUsername(){
+        return user;
+    }
     static public Account pseudoLogin(String _user, UserDatabase data){
         if (data.presentInDataBase(_user)){
             return new Account(_user, true);
         }
-        else return null;
+        else {
+            return null;
+
+        }
     }
 
     static public Account login(String _user,
