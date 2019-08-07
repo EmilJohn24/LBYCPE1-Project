@@ -19,6 +19,7 @@ public class Building implements ResizableStruct{
         this.left = left; //X-coord
         this.height = height;
         this.width = width;
+        this.floors = new ArrayList<>();
         graphic = new GRect(left, top, width, height);
     }
 
@@ -28,6 +29,7 @@ public class Building implements ResizableStruct{
         this.left = 0;
         this.height = 0;
         this.width = 0;
+        this.floors = new ArrayList<>();
         graphic = new GRect(this.left, this.top, this.width, this.height);
     }
 
