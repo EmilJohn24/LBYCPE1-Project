@@ -57,11 +57,21 @@ public class Room implements ResizableStruct{
         this.left = left;
         this.width = width;
         this.height = height;
-        graphic = new GRect(left, top, width, height);
+        this.slots = new Hashtable<>();
+        this.graphic = new GRect(left, top, width, height);
 
     }
 
     Room(){
+        this.name = new String();
+        this.capacity = 0;
+        this.description = new String();
+        this.top = 0;
+        this.left = 0;
+        this.width = 0;
+        this.height = 0;
+        this.slots = new Hashtable<>();
+        this.graphic = new GRect(0, 0 ,0, 0);
         return;
     }
 
