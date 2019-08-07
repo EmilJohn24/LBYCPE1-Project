@@ -1,5 +1,7 @@
 package Server.Structures;
 
+import Server.Transaction.Account;
+import Server.Transaction.UserDatabase;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -16,7 +18,7 @@ import java.util.InvalidPropertiesFormatException;
                 <description>Very nice room</description>
 
                 <date day="30" month="12" year="1999">
-                    <slot time="12:30">emil_lopez@dlsu.edu.ph</slot>
+                    <slot hour="12" minute="30" >emil_lopez@dlsu.edu.ph</slot>
                 </date>
             </room>
         </floor>
@@ -29,6 +31,7 @@ import java.util.InvalidPropertiesFormatException;
 public class StructureParser {
     private File structureFile;
     private DocumentBuilder build;
+    private UserDatabase tempDatabase;
     private Document structureDoc;
     private final String inspector = "dlsu";
     private final String buildingsIndicator = "building";
@@ -37,8 +40,9 @@ public class StructureParser {
     private final String descriptionIndicator = "description";
     private final String dateIndicator = "date";
     private final String slotIndicator = "slot";
-    StructureParser(String fileName) throws ParserConfigurationException,
+    StructureParser(String fileName, UserDatabase users) throws ParserConfigurationException,
                                     IOException, SAXException {
+        this.tempDatabase = users;
         structureFile = new File(fileName);
         DocumentBuilderFactory factory =
                 DocumentBuilderFactory.newInstance();
@@ -113,9 +117,30 @@ public class StructureParser {
             Element descriptor = (Element) currentRoom.
                         getElementsByTagName(descriptionIndicator).item(0);
             newRoom.setDescription(descriptor.getNodeValue());
+            chuckSlots(newRoom, currentRoom.getElementsByTagName(dateIndicator));
             newFloor.addRoom(newRoom);
 
 
+        }
+    }
+
+    private void chuckSlots(Room newRoom, NodeList dates){
+        for (int dCount = 0; dCount < dates.getLength(); dCount++){
+            Element currentDate = (Element) dates.item(dCount);
+            int day = getElementAsInt(currentDate, "day");
+            int month = getElementAsInt(currentDate, "month");
+            int year = getElementAsInt(currentDate, "year");
+            NodeList daySlots = currentDate.getElementsByTagName(slotIndicator);
+
+            for (int sCount = 0; sCount < daySlots.getLength(); sCount++){
+                Element currentSlot = (Element) daySlots.item(sCount);
+                int hour = getElementAsInt(currentSlot, "hour");
+                int minute = getElementAsInt(currentSlot, "minute");
+                String username = currentSlot.getNodeValue();
+                Account transientLogin = Account.pseudoLogin(username, tempDatabase);
+                if (!username.isEmpty()) newRoom.fillSlot(transientLogin, month, day, year, hour, minute);
+                else newRoom.addEmptySlot(month, day, year, hour, minute);
+            }
         }
     }
 }
