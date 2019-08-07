@@ -21,7 +21,7 @@ public class ServerThread extends Thread{
     }
 
 
-
+    //handles requests from the client. For now, it simply displays them as messages.
     private void process(String request){
         ServerLog.globalLog("Message: " + request);
     }
