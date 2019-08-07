@@ -48,4 +48,8 @@ public class Floor {
         floor.setSize(floor.getWidth(), height);
         this.height = height;
     }
+
+    public ArrayList<Room> getReferenceToRooms(){
+        return rooms;
+    }
 }
