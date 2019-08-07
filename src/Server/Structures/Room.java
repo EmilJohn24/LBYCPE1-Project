@@ -74,7 +74,7 @@ public class Room implements ResizableStruct{
     public void addEmptySlot(int month, int day, int year, int hour, int minute){
         Calendar newDate = Room.turnToTime(month, day, year, hour, minute);
         RoomSlot newSlot = new RoomSlot();
-        slots.putIfAbsent(newDate, newSlot);
+        slots.putIfAbsent(newDate, newSlot); //TODO: Note possible compatibility issues. Look up later
     }
 
     public void fillSlot(Account user, int month, int day, int year, int hour, int minute){
