@@ -15,6 +15,7 @@ public class Floor {
         this.floorCount = floorCount;
         this.width = width;
         this.height = height;
+        this.rooms = new ArrayList<>();
         floor = new GCanvas();
         floor.setSize(width, height);
     }
