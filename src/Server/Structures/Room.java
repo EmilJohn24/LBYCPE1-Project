@@ -13,8 +13,25 @@ import java.util.Hashtable;
 // ~[X] [Y] [Vertex Info] [Starting Time HH:MM] [Minute Intervals for Reservations]
 // [Date] [Interval Counts from Starting Time] [Username]
 class RoomSlot {
+    public RoomSlot(){
+        client = null;
+    }
+
+    public RoomSlot(Account client){
+        this.client = client;
+    }
+
+    protected Account getClient(){
+        return this.client;
+    }
+
+
+    public boolean isEmpty(){
+        return getClient() == null;
+    }
     private Account client;
 }
+
 
 public class Room implements ResizableStruct{
     private int capacity;
@@ -48,11 +65,22 @@ public class Room implements ResizableStruct{
         return;
     }
 
-    public void addEmptySlot(int month, int day, int year, int hour, int minute){
+    public static Calendar turnToTime(int month, int day, int year, int hour, int minute){
         Calendar newDate = Calendar.getInstance();
         newDate.set(year, month, day, hour, minute);
+        return newDate;
+    }
+
+    public void addEmptySlot(int month, int day, int year, int hour, int minute){
+        Calendar newDate = Room.turnToTime(month, day, year, hour, minute);
         RoomSlot newSlot = new RoomSlot();
-        slots.put(newDate, newSlot);
+        slots.putIfAbsent(newDate, newSlot);
+    }
+
+    public void fillSlot(Account user, int month, int day, int year, int hour, int minute){
+        Calendar newDate = Room.turnToTime(month, day, year, hour, minute);
+        slots.put(newDate, new RoomSlot(user));
+
     }
 
 
