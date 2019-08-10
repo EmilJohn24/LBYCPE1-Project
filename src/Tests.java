@@ -15,6 +15,7 @@ public class Tests {
         try {
             StructureParser testParse = new StructureParser("test.xml", testDatabase);
             ArrayList<Building> result = testParse.parse();
+
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (IOException e) {

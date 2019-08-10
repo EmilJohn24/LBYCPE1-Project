@@ -1,11 +1,12 @@
 <dlsu>
-	<building name="Razon" top="10" left="10" height="10" width="10">
+	<building name="St. La Salle Hall" top="10" left="10" height="10" width="10">
 		<floor number="1" height="100" width="100">
-			<room top="10" left="10" width="30" height="30" name="Room">
+			<room top="10" left="10" width="30" height="30" name="LS206">
 				<description>Very nice room</description>
 				<date day="30" month="2" year="1999">
-					<slot hour="12" minute="30" >emil_lopez@dlsu.edu.ph</slot>
+					<slot hour="12" minute="30">emil_lopez@dlsu.edu.ph</slot>
 					<slot hour="11" minute="30">jet_chua@dlsu.edu.ph</slot>
+					<slot hour="10" minute="30"></slot> <!--Empty slot-->
 				</date>
 			</room>
 		</floor>
@@ -13,6 +14,12 @@
 	
 	<building name="Velasco Hall" top="30" left="30" height="20" width="20">
 		<floor number="3" height="100" width="100">
+			<room top="20" left="20" width="30" height="30" name="V307">
+				<description>Old room</description>
+				<date day="29" month="2" year="1999">
+					<slot hour="12" minute="30">josef_solis@dlsu.edu.ph</slot>
+				</date>
+			</room>
 		</floor>	
 	</building>
 
