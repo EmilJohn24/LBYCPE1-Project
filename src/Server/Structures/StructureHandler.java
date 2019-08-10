@@ -6,6 +6,8 @@ import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.*;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.dom.DOMSource;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,6 +36,10 @@ public class StructureParser {
     private DocumentBuilder build;
     private UserDatabase tempDatabase;
     private Document structureDoc;
+    private Transformer updater;
+    private DOMSource src;
+    
+
     private final String inspector = "dlsu";
     private final String buildingsIndicator = "building";
     private final String floorIndicator = "floor";
@@ -68,7 +74,7 @@ public class StructureParser {
                 for (int fCount = 0; fCount < floorNodes.getLength(); fCount++){
 
                     Element currentFloor = (Element) floorNodes.item(fCount);
-                    if (floor == getElementAsInt(currentFloor, floorIndicator)){
+                    if (floor == getElementAsInt(currentFloor, "number")){
                         NodeList roomNodes = currentFloor.getElementsByTagName(roomIndicator);
 
                         for (int rCount = 0; rCount < roomNodes.getLength(); rCount++){
@@ -82,11 +88,10 @@ public class StructureParser {
                                         NodeList slotNodes = currentRoom.getElementsByTagName(slotIndicator);
 
                                         for (int sCount = 0; sCount < slotNodes.getLength(); sCount++){
-                                            Element currentSlot = (Element) dateNodes.item(sCount);
-
-                                            if (hour == getElementAsInt(currentSlot, "hour") && minute == getElementAsInt(currentDate, "minute")){
-                                                String reservation = currentSlot.getTextContent();
-                                                if (reservation.isEmpty()) return "ROOM_NOT_AVAILABLE";
+                                            Element currentSlot = (Element) slotNodes.item(sCount);
+                                            if (hour == getElementAsInt(currentSlot, "hour") && minute == getElementAsInt(currentSlot, "minute")){
+                                                String reservation = currentSlot.getTextContent().trim();
+                                                if (!reservation.isEmpty()) return "ROOM_NOT_AVAILABLE";
                                                 else {
                                                     currentSlot.setTextContent(user.getUsername());
                                                     return "RESERVATION_COMPLETE";
@@ -107,6 +112,10 @@ public class StructureParser {
             }
         }
         return "SLOT_NOT_FOUND";
+    }
+
+    public static ArrayList<Building> update(){
+
     }
 
 
