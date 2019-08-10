@@ -1,6 +1,7 @@
 package Server;
 
 import Server.Transaction.SessionManager;
+import com.sun.org.apache.xalan.internal.xsltc.dom.ArrayNodeListIterator;
 
 import javax.security.auth.login.FailedLoginException;
 import java.io.BufferedReader;
@@ -9,12 +10,14 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class ServerThread extends Thread{
     private Socket _socket;
-    PrintWriter output;
-    BufferedReader input;
-    Integer sessionID;
+    private PrintWriter output;
+    private BufferedReader input;
+    private Integer sessionID;
     public ServerThread(Socket socket) throws IOException{
         super("Thread::" + socket.getInetAddress());
         this._socket = socket;
@@ -31,20 +34,59 @@ public class ServerThread extends Thread{
     //Normal Types:
     //LOGIN:[username],[password]
     //GET_ROOM_DATA
-    //RESERVE
-    private void process(String request){
+    //RESERVE:[SESSIONID],[BUILDING NAME],[FLOOR],[ROOM]
+
+
+    //Returnable Messages:
+    //ERROR_RESERVE
+    //LOGIN_SUCCESS:[SESSIONID]
+    //LOGIN_FAILED
+    //INVALID_CREDENTIALS
+    //RANDOM_NETWORK_ERROR
+    //ROOM_NOT_AVAILABLE
+    private String process(String request){
 
         ServerLog.globalLog("Message: " + request);
+        String[] requestComponents = request.split(":", 2);
+        String requestID = requestComponents[0];
+        String[] params = requestComponents[1].split(",");
+        switch (requestID){
+            case "LOGIN":
+                return loginRequestHandler(params[0], params[1]);
+            case "GET_ROOM_DATA":
+                return roomRequestHandler(); //return xml via manager request
+            case "RESERVE":
+                return null; //
+
+        }
+
+        return null;
     }
 
+    private String roomRequestHandler(){
+        return null;
+    }
 
-    private void loginRequestHandler(String username, String password){
+    private String reservationHandler(String sessionID, String building, String floor, String room, String time){
+        return null;
+    }
+    private String loginRequestHandler(String username, String password){
         try {
-            sessionID = SessionManager.login(username, password);
+            sessionID = SessionManager.addSession(username, password);
+            if (sessionID != 0){
+                return "LOGIN_SUCCESS" + " " + String.valueOf(sessionID);
+            }
+            else{
+                return "INVALID_CREDENTIALS";
+            }
         } catch (FailedLoginException e) {
-            output.println("LOGIN_FAILED");
+            return "LOGIN_FAILED";
         }
     }
+
+
+
+
     public void start(){
         String request;
         try {
@@ -74,6 +116,11 @@ public class ServerThread extends Thread{
     public void close() throws IOException, InterruptedException {
         _socket.close();
         this.join();
+
+    }
+
+    public void send(String message){
+        output.println(message);
 
     }
 
