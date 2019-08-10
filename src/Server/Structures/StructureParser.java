@@ -8,6 +8,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.InvalidPropertiesFormatException;
 
 /*
@@ -54,7 +55,32 @@ public class StructureParser {
                                                     "Structure XML file");
         }
     }
+    //TODO: Add reservation adder
+    //Looks up exact node to reservation to
+    //No checks will be performed here, do it lower in the stack
+    public void addReservation(String building, Integer floor, String room, int month, int day, int year, int hour, int minute, Account user){
+        NodeList buildingNodes = structureDoc.getElementsByTagName(buildingsIndicator);
+        for (int bCount = 0; bCount < buildingNodes.getLength(); bCount++){
 
+            Element currentBuilding = (Element) buildingNodes.item(bCount);
+            if (building.equals(currentBuilding.getAttribute("name"))){
+                NodeList floorNodes = currentBuilding.getElementsByTagName(floorIndicator);
+                for (int fCount = 0; fCount < floorNodes.getLength(); fCount++){
+
+                    Element currentFloor = (Element) floorNodes.item(fCount);
+                    if (floor == getElementAsInt(currentFloor, floorIndicator)){
+                        NodeList currentRoom = currentFloor.getElementsByTagName(roomIndicator);
+
+                        for (int rCount = 0; rCount < currentRoom.getLength(); rCount++){
+
+                        }
+                    }
+
+                }
+                break;
+            }
+        }
+    }
 
 
     public static double getElementAsDouble(Element e, String attr){
