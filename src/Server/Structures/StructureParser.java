@@ -58,7 +58,7 @@ public class StructureParser {
     //TODO: Add reservation adder
     //Looks up exact node to reservation to
     //No checks will be performed here, do it lower in the stack
-    public void addReservation(String building, Integer floor, String room, int month, int day, int year, int hour, int minute, Account user){
+    public String addReservation(String building, Integer floor, String room, int month, int day, int year, int hour, int minute, Account user){
         NodeList buildingNodes = structureDoc.getElementsByTagName(buildingsIndicator);
         for (int bCount = 0; bCount < buildingNodes.getLength(); bCount++){
 
@@ -69,17 +69,44 @@ public class StructureParser {
 
                     Element currentFloor = (Element) floorNodes.item(fCount);
                     if (floor == getElementAsInt(currentFloor, floorIndicator)){
-                        NodeList currentRoom = currentFloor.getElementsByTagName(roomIndicator);
+                        NodeList roomNodes = currentFloor.getElementsByTagName(roomIndicator);
 
-                        for (int rCount = 0; rCount < currentRoom.getLength(); rCount++){
+                        for (int rCount = 0; rCount < roomNodes.getLength(); rCount++){
+                            Element currentRoom = (Element) roomNodes.item(rCount);
+                            if (room.equals(currentRoom.getAttribute("name"))){
 
+                                NodeList dateNodes = currentRoom.getElementsByTagName(dateIndicator);
+                                for (int dCount = 0; dCount < dateNodes.getLength(); dCount++){
+                                    Element currentDate = (Element) dateNodes.item(dCount);
+                                    if (month == getElementAsInt(currentDate, "month") && day == getElementAsInt(currentDate, "day") && year == getElementAsInt(currentDate, "year")){
+                                        NodeList slotNodes = currentRoom.getElementsByTagName(slotIndicator);
+
+                                        for (int sCount = 0; sCount < slotNodes.getLength(); sCount++){
+                                            Element currentSlot = (Element) dateNodes.item(sCount);
+
+                                            if (hour == getElementAsInt(currentSlot, "hour") && minute == getElementAsInt(currentDate, "minute")){
+                                                String reservation = currentSlot.getTextContent();
+                                                if (reservation.isEmpty()) return "ROOM_NOT_AVAILABLE";
+                                                else {
+                                                    currentSlot.setTextContent(user.getUsername());
+                                                    return "RESERVATION_COMPLETE";
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    }
+
+                                }
+                            }
                         }
+                        break;
                     }
 
                 }
                 break;
             }
         }
+        return "SLOT_NOT_FOUND";
     }
 
 
