@@ -7,7 +7,11 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.*;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,14 +35,16 @@ import java.util.InvalidPropertiesFormatException;
  */
 //This uses the Java DOM XML Parser which requires complete knowledge of
 //all tags used in the file
-public class StructureParser {
+public class StructureHandler {
     private File structureFile;
     private DocumentBuilder build;
     private UserDatabase tempDatabase;
     private Document structureDoc;
+
     private Transformer updater;
+    private StreamResult result;
     private DOMSource src;
-    
+
 
     private final String inspector = "dlsu";
     private final String buildingsIndicator = "building";
@@ -47,8 +53,8 @@ public class StructureParser {
     private final String descriptionIndicator = "description";
     private final String dateIndicator = "date";
     private final String slotIndicator = "slot";
-    public StructureParser(String fileName, UserDatabase users) throws ParserConfigurationException,
-                                    IOException, SAXException {
+    public StructureHandler(String fileName, UserDatabase users) throws ParserConfigurationException,
+            IOException, SAXException, TransformerConfigurationException {
         this.tempDatabase = users;
         structureFile = new File(fileName);
         DocumentBuilderFactory factory =
@@ -60,11 +66,17 @@ public class StructureParser {
             throw new InvalidPropertiesFormatException("Not a valid DLSU " +
                                                     "Structure XML file");
         }
+
+        TransformerFactory factoryOut = TransformerFactory.newInstance();
+        updater = factoryOut.newTransformer();
+        src = new DOMSource(structureDoc);
+        result = new StreamResult(structureFile);
+
     }
-    //TODO: Add reservation adder
+
     //Looks up exact node to reservation to
     //No checks will be performed here, do it lower in the stack
-    public String addReservation(String building, Integer floor, String room, int month, int day, int year, int hour, int minute, Account user){
+    public String addReservation(String building, Integer floor, String room, int month, int day, int year, int hour, int minute, Account user) throws TransformerException {
         NodeList buildingNodes = structureDoc.getElementsByTagName(buildingsIndicator);
         for (int bCount = 0; bCount < buildingNodes.getLength(); bCount++){
 
@@ -94,6 +106,7 @@ public class StructureParser {
                                                 if (!reservation.isEmpty()) return "ROOM_NOT_AVAILABLE";
                                                 else {
                                                     currentSlot.setTextContent(user.getUsername());
+                                                    updateFile();
                                                     return "RESERVATION_COMPLETE";
                                                 }
                                             }
@@ -114,8 +127,8 @@ public class StructureParser {
         return "SLOT_NOT_FOUND";
     }
 
-    public static ArrayList<Building> update(){
-
+    public void updateFile() throws TransformerException {
+        updater.transform(src, result);
     }
 
 
