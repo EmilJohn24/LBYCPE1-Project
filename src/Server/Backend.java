@@ -31,6 +31,7 @@ public class Backend {
             }
             catch (NullPointerException e){
                 log("No new connection established. Trying again...");
+                e.printStackTrace();
             }
 
 
