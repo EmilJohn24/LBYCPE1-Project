@@ -46,8 +46,9 @@ public class ServerThread extends Thread{
     private String process(String request){
 
         ServerLog.globalLog("Message: " + request);
-        String[] requestComponents = request.split(":", 2);
+        String[] requestComponents = request.split(":");
         String requestID = requestComponents[0];
+        System.out.println(requestID);
         String[] params = requestComponents[1].split(",");
         switch (requestID){
             case "LOGIN":
@@ -55,7 +56,7 @@ public class ServerThread extends Thread{
             case "GET_ROOM_DATA":
                 return roomRequestHandler(); //return xml via manager request
             case "RESERVE":
-                return null; //
+                return reservationHandler(params[0], params[1], params[2], params[3], params[4]); //
 
         }
 
@@ -88,10 +89,12 @@ public class ServerThread extends Thread{
 
     public void start(){
         String request;
+        String message;
         try {
             while (true) {
                 request = listen();
-                process(request);
+                message = process(request);
+                send(message);
             }
         }
         catch(IOException e){
