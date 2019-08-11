@@ -8,7 +8,7 @@ public class Client {
     public void log(String message){
         System.out.println(message);
     }
-    Client(String hostname, int port){
+    public Client(String hostname, int port){
         try {
             _socket = new ConnectorSocket(hostname, port);
         }
