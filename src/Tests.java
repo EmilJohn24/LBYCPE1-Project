@@ -1,3 +1,4 @@
+import Client.Client;
 import Server.Structures.*;
 import Server.Transaction.Account;
 import Server.Transaction.UserDatabase;
@@ -33,5 +34,12 @@ public class Tests {
             e.printStackTrace();
         }
 
+    }
+
+    @Test
+    public void connectionTest(){
+        Client dummyClient = new Client("127.0.0.1", 4400);
+        dummyClient.sendRequest("LOGIN:emil_lopez@dlsu.edu.ph,fakepassword");
+        System.out.println(dummyClient.getResponse());
     }
 }
