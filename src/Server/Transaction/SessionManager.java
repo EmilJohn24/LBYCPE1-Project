@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class SessionManager {
     private static HashMap<Integer, Account> sessions; //links session IDs to accounts
     private static UserDatabase users;
-
+    private static final String databaseFilename = "users.txt";
     public static Integer getHashCode(Account acc){
         return acc.getUsername().hashCode();
     }
@@ -20,8 +20,8 @@ public class SessionManager {
         }
     }
 
-    private static Integer addToSessions(Account acc) {
-        Integer hash = getHashCode(acc);
+    private static int addToSessions(Account acc) {
+        int hash = getHashCode(acc);
         sessions.put(hash, acc);
         return hash;
     }
@@ -31,9 +31,15 @@ public class SessionManager {
     }
 
     public static Integer addSession(String user, String password) throws FailedLoginException {
-        return addToSessions(SessionManager.login(user, password));
+        Account newLogin = SessionManager.login(user, password);
+        return addToSessions(newLogin);
     }
 
+
+    static{
+        users = new UserDatabase(databaseFilename);
+        sessions = new HashMap<>();
+    }
 
 
 
