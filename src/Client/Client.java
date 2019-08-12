@@ -8,17 +8,21 @@ public class Client {
     public void log(String message){
         System.out.println(message);
     }
+
     public Client(String hostname, int port){
         try {
             _socket = new ConnectorSocket(hostname, port);
         }
         catch (IOException e){
             log("Error establishing connection. Error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    public void sendRequest(String requestStr){
-        _socket.sendRequest(requestStr);
+    public void sendRequest(String requestStr) throws Exception {
+        if (_socket.isConnected())
+            _socket.sendRequest(requestStr);
+        else throw new Exception("Error connecting to server");
     }
 
     public String getResponse(){
@@ -26,9 +30,8 @@ public class Client {
             return _socket.getResponse();
         }
         catch(IOException e){
-            log("Error communicating with server.");
+            e.printStackTrace();
         }
-
         return null;
     }
 }
