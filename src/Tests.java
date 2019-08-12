@@ -37,9 +37,14 @@ public class Tests {
     }
 
     @Test
-    public void connectionTest(){
+    public void connectionAndReservationTest(){
         Client dummyClient = new Client("127.0.0.1", 4400);
         dummyClient.sendRequest("LOGIN:emil_lopez@dlsu.edu.ph,fakepassword");
+        String sessionResponse = dummyClient.getResponse();
+        System.out.println(sessionResponse);
+        String sessionID = sessionResponse.split(":")[1];
+        dummyClient.sendRequest("RESERVE:" + sessionID + ",Velasco Hall,3,V307,2,29,1999,11,30");
         System.out.println(dummyClient.getResponse());
+        //RESERVE:[SESSIONID],[BUILDING NAME],[FLOOR],[ROOM],[MONTH],[DAY],[YEAR],[HOUR],[MINUTE]
     }
 }
