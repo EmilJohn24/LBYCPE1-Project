@@ -1,8 +1,12 @@
 package Server;
 
+import Server.Transaction.Account;
 import Server.Transaction.SessionManager;
+import Server.Transaction.Manager;
+import org.xml.sax.SAXException;
 
 import javax.security.auth.login.FailedLoginException;
+import javax.xml.transform.TransformerException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,7 +37,7 @@ public class ServerThread extends Thread{
     //Normal Types:
     //LOGIN:[username],[password]
     //GET_ROOM_DATA
-    //RESERVE:[SESSIONID],[BUILDING NAME],[FLOOR],[ROOM]
+    //RESERVE:[SESSIONID],[BUILDING NAME],[FLOOR],[ROOM],[MONTH],[DAY],[YEAR],[HOUR],[MINUTE]
 
 
     //Returnable Messages:
@@ -56,8 +60,7 @@ public class ServerThread extends Thread{
             case "GET_ROOM_DATA":
                 return roomRequestHandler(); //return xml via manager request
             case "RESERVE":
-                return reservationHandler(params[0], params[1], params[2], params[3], params[4]); //
-
+                return reservationHandler(params[0], params[1], params[2], params[3], params[4], params[5], params[6], params[7], params[8]); //
         }
 
         return null;
@@ -67,14 +70,26 @@ public class ServerThread extends Thread{
         return null;
     }
 
-    private String reservationHandler(String sessionID, String building, String floor, String room, String time){
+    private String reservationHandler(String sessionID, String building, String floor, String room, String month, String day, String year, String hour, String minute){
+        try {
+            return SessionManager.reserve(sessionID, building, floor, room, Integer.parseInt(month), Integer.parseInt(day), Integer.parseInt(year), Integer.parseInt(hour), Integer.parseInt(minute));
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return null;
+
+
     }
     private String loginRequestHandler(String username, String password){
         try {
             sessionID = SessionManager.addSession(username, password);
             if (sessionID != 0){
-                return "LOGIN_SUCCESS" + " " + String.valueOf(sessionID);
+                return "LOGIN_SUCCESS" + ":" + String.valueOf(sessionID);
             }
             else{
                 return "INVALID_CREDENTIALS";
