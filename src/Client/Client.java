@@ -40,8 +40,8 @@ public class Client {
 
     public void loadBuildingGUI() throws SAXException, ParserConfigurationException, TransformerConfigurationException, IOException {
         if (buildings == null) loadBuildings();
+        GraphicClientEndConnector.loadUpBuildingGraphics(buildings);
 
-        GraphicClientEndConnector.connectClient(this);
     }
 
     public void loadRoomData() throws IOException, SAXException, ParserConfigurationException, TransformerConfigurationException {
@@ -79,5 +79,19 @@ public class Client {
             e.printStackTrace();
         }
         return null;
+    }
+    public String sendReservationRequest(String building, int floor, String room,
+                                int month, int day, int year, int hour, int minute){
+        sendRequest("RESERVE:" + sessionID + "," + building + "," + floor + "," + room + "," + month + "," + day + "," + year + ","
+                    + hour + "," + minute);
+        return getResponse();
+
+    }
+    public int getSessionID() {
+        return sessionID;
+    }
+
+    public void setSessionID(int sessionID) {
+        this.sessionID = sessionID;
     }
 }
