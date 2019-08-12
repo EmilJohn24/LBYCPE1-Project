@@ -12,6 +12,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Tests {
+
+    Client dummyClient;
+
+    public Tests(){
+        dummyClient = new Client("127.0.0.1", 4400);
+    }
     @Test
     public void xmlParseTest(){
 
@@ -38,13 +44,35 @@ public class Tests {
 
     @Test
     public void connectionAndReservationTest(){
-        Client dummyClient = new Client("127.0.0.1", 4400);
-        dummyClient.sendRequest("LOGIN:emil_lopez@dlsu.edu.ph,fakepassword");
+        try {
+            dummyClient.sendRequest("LOGIN:emil_lopez@dlsu.edu.ph,fakepassword");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String sessionResponse = dummyClient.getResponse();
         System.out.println(sessionResponse);
         String sessionID = sessionResponse.split(":")[1];
-        dummyClient.sendRequest("RESERVE:" + sessionID + ",Velasco Hall,3,V307,2,29,1999,11,30");
+        try {
+            dummyClient.sendRequest("RESERVE:" + sessionID + ",Velasco Hall,3,V307,2,29,1999,11,30");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println(dummyClient.getResponse());
         //RESERVE:[SESSIONID],[BUILDING NAME],[FLOOR],[ROOM],[MONTH],[DAY],[YEAR],[HOUR],[MINUTE]
+    }
+     
+
+    @Test
+    public void roomRequestTest(){
+        try {
+            dummyClient.sendRequest("GET_ROOM_DATA");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String response = dummyClient.getResponse();
+        if (response.equals("SENDING_ROOM_DATA")){
+            System.out.println(dummyClient.getResponse());
+        }
+
     }
 }
