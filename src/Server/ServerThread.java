@@ -7,14 +7,10 @@ import org.xml.sax.SAXException;
 
 import javax.security.auth.login.FailedLoginException;
 import javax.xml.transform.TransformerException;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Collection;
+
 
 public class ServerThread extends Thread{
     private Socket _socket;
@@ -41,6 +37,9 @@ public class ServerThread extends Thread{
 
 
     //Returnable Messages:
+    //SENDING_ROOM_DATA [ROOM_DATA] SENT_ROOM_DATA
+    //ERROR_SENDING_FILE
+    //XML_FILE_NOT_FOUND
     //ERROR_RESERVE
     //LOGIN_SUCCESS:[SESSIONID]
     //LOGIN_FAILED
@@ -53,12 +52,13 @@ public class ServerThread extends Thread{
         String[] requestComponents = request.split(":");
         String requestID = requestComponents[0];
         System.out.println(requestID);
-        String[] params = requestComponents[1].split(",");
+        String params[] = new String[10];
+        if (requestComponents.length > 1)  params = requestComponents[1].split(",");
         switch (requestID){
             case "LOGIN":
                 return loginRequestHandler(params[0], params[1]);
             case "GET_ROOM_DATA":
-                return roomRequestHandler(); //return xml via manager request
+                return roomRequestHandler(); //send xml via manager request. Return ID indicating the transfer is complete
             case "RESERVE":
                 return reservationHandler(params[0], params[1], params[2], params[3], params[4], params[5], params[6], params[7], params[8]); //
         }
@@ -67,7 +67,25 @@ public class ServerThread extends Thread{
     }
 
     private String roomRequestHandler(){
-        return null;
+        File structureFile = SessionManager.getStructureFile();
+        String dataLine;
+        send("SENDING_ROOM_DATA");
+        try {
+            BufferedReader structureFileReader = new BufferedReader(new FileReader(structureFile));
+            while ((dataLine = structureFileReader.readLine()) != null) {
+                send(dataLine);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return "XML_FILE_NOT_FOUND";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "ERROR_SENDING_FILE";
+        } finally{
+            return "SENT_ROOM_DATA";
+        }
+
+
     }
 
     private String reservationHandler(String sessionID, String building, String floor, String room, String month, String day, String year, String hour, String minute){
@@ -114,6 +132,7 @@ public class ServerThread extends Thread{
         }
         catch(IOException e){
             ServerLog.globalLog("Socket " + _socket.getInetAddress() + " has crashed.");
+            e.printStackTrace();
         }
     }
 
