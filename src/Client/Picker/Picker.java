@@ -1,10 +1,18 @@
-package Picker;
+package Client.Picker;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+import Client.GraphicClientEndConnector;
+
+import javax.swing.event.ChangeEvent;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -91,29 +99,50 @@ public class Picker extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void centralChangeHandler(){
-        
+        //TODO
+        Integer newValue = floorPicker.getItemAt(floorPicker.getSelectedIndex());
+        monthStateChanged(new ChangeEvent(month));
+        System.out.println("Changing floor to:" + newValue);
+        GraphicClientEndConnector.setCurrentFloor(newValue);
+
     }
     
     private void floorPickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_floorPickerActionPerformed
-        // TODO add your handling code here:
         centralChangeHandler();
         
     }//GEN-LAST:event_floorPickerActionPerformed
 
     private void monthStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_monthStateChanged
-        // TODO add your handling code here:
-        centralChangeHandler();
+
+        Object date = month.getValue();
+        if (date instanceof Date){
+            Date newDate = (Date) date;
+            SimpleDateFormat formatDate = new SimpleDateFormat ("MM dd yyyy hh mm");
+            String dateStr = formatDate.format(newDate);
+            String[] dateInfo = dateStr.split(" ");
+            GraphicClientEndConnector.changeTime(Integer.parseInt(dateInfo[0]), Integer.parseInt(dateInfo[1]),
+                                        Integer.parseInt(dateInfo[2]), Integer.parseInt(dateInfo[3]), Integer.parseInt(dateInfo[4]));
+
+
+
+        }
     }//GEN-LAST:event_monthStateChanged
 
     private void floorPickerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_floorPickerItemStateChanged
-        // TODO add your handling code here:
-        centralChangeHandler();
     }//GEN-LAST:event_floorPickerItemStateChanged
 
     /**
-     * @param args the command line arguments
+     * //@param args the command line arguments
      */
-    public static void main(String args[]) {
+
+    public void clear(){
+        this.floorPicker.removeAll();
+    }
+
+    public void addChoice(Integer floorCount){
+        this.floorPicker.addItem(floorCount);
+    }
+    public static void runner(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
