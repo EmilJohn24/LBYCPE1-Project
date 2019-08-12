@@ -33,6 +33,8 @@ public class Building implements ResizableStruct{
         graphic = new GRect(this.left, this.top, this.width, this.height);
     }
 
+    public ArrayList<Floor> getFloors(){return this.floors;}
+
     public void addFloor(Floor newFloor){
         floors.add(newFloor);
     }
@@ -84,6 +86,10 @@ public class Building implements ResizableStruct{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }
 
