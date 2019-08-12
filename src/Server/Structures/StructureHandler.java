@@ -76,7 +76,7 @@ public class StructureHandler {
 
     //Looks up exact node to reservation to
     //No checks will be performed here, do it lower in the stack
-    public String addReservation(String building, Integer floor, String room, int month, int day, int year, int hour, int minute, Account user) throws TransformerException {
+    public String addReservation(String building, Integer floor, String room, int month, int day, int year, int hour, int minute, Account user) throws TransformerException, IOException, SAXException {
         NodeList buildingNodes = structureDoc.getElementsByTagName(buildingsIndicator);
         for (int bCount = 0; bCount < buildingNodes.getLength(); bCount++){
 
@@ -127,8 +127,10 @@ public class StructureHandler {
         return "SLOT_NOT_FOUND";
     }
 
-    public void updateFile() throws TransformerException {
+    public void updateFile() throws TransformerException, IOException, SAXException {
         updater.transform(src, result);
+        structureDoc = build.parse(structureFile);
+
     }
 
 
