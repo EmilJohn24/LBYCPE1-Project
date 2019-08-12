@@ -5,6 +5,7 @@ import org.xml.sax.SAXException;
 
 import javax.security.auth.login.FailedLoginException;
 import javax.xml.transform.TransformerException;
+import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -30,6 +31,10 @@ public class SessionManager {
         int hash = getHashCode(acc);
         sessions.put(hash, acc);
         return hash;
+    }
+
+    public static File getStructureFile(){
+        return Manager.getStructureFile();
     }
 
     public static Integer addSession(Account newAccount){
