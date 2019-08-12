@@ -48,10 +48,9 @@ public class ServerThread extends Thread{
     //ROOM_NOT_AVAILABLE
     private String process(String request){
 
-        ServerLog.globalLog("Message: " + request);
+        ServerLog.globalLog("Processing message: " + request);
         String[] requestComponents = request.split(":");
         String requestID = requestComponents[0];
-        System.out.println(requestID);
         String params[] = new String[10];
         if (requestComponents.length > 1)  params = requestComponents[1].split(",");
         switch (requestID){
@@ -66,29 +65,26 @@ public class ServerThread extends Thread{
         return null;
     }
 
-    private String roomRequestHandler(){
+    private String roomRequestHandler() {
         File structureFile = SessionManager.getStructureFile();
         String dataLine;
-        send("SENDING_ROOM_DATA");
+        String data = "ROOM_DATA:";
         try {
             BufferedReader structureFileReader = new BufferedReader(new FileReader(structureFile));
             while ((dataLine = structureFileReader.readLine()) != null) {
-                send(dataLine);
+                data += dataLine;
             }
+            return data;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return "XML_FILE_NOT_FOUND";
         } catch (IOException e) {
             e.printStackTrace();
             return "ERROR_SENDING_FILE";
-        } finally{
-            return "SENT_ROOM_DATA";
         }
-
-
     }
 
-    private String reservationHandler(String sessionID, String building, String floor, String room, String month, String day, String year, String hour, String minute){
+        private String reservationHandler(String sessionID, String building, String floor, String room, String month, String day, String year, String hour, String minute){
         try {
             return SessionManager.reserve(sessionID, building, floor, room, Integer.parseInt(month), Integer.parseInt(day), Integer.parseInt(year), Integer.parseInt(hour), Integer.parseInt(minute));
         } catch (TransformerException e) {
