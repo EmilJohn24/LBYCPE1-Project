@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><dlsu>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<dlsu>
 	<building height="10" left="10" name="St. La Salle Hall" top="10" width="10">
 		<floor height="100" number="1" width="100">
 			<room height="30" left="10" name="LS206" top="10" width="30">
