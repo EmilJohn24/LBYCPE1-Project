@@ -12,25 +12,7 @@ import java.util.Hashtable;
 // Directory: Building/Floor/
 // ~[X] [Y] [Vertex Info] [Starting Time HH:MM] [Minute Intervals for Reservations]
 // [Date] [Interval Counts from Starting Time] [Username]
-class RoomSlot {
-    public RoomSlot(){
-        client = null;
-    }
 
-    public RoomSlot(Account client){
-        this.client = client;
-    }
-
-    protected Account getClient(){
-        return this.client;
-    }
-
-
-    public boolean isEmpty(){
-        return getClient() == null;
-    }
-    private Account client;
-}
 
 
 public class Room implements ResizableStruct{
@@ -73,6 +55,9 @@ public class Room implements ResizableStruct{
         this.slots = new Hashtable<>();
         this.graphic = new GRect(0, 0 ,0, 0);
         return;
+    }
+    public Hashtable<Calendar, RoomSlot> getSlots(){
+        return slots;
     }
 
     public static Calendar turnToTime(int month, int day, int year, int hour, int minute){

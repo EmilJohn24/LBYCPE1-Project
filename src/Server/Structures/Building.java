@@ -2,6 +2,7 @@ package Server.Structures;
 
 import acm.graphics.GRect;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Building implements ResizableStruct{
@@ -21,6 +22,10 @@ public class Building implements ResizableStruct{
         this.width = width;
         this.floors = new ArrayList<>();
         graphic = new GRect(left, top, width, height);
+        graphic.setColor(new Color(0x00FF00));
+        graphic.setFillColor(new Color(0x00FF00));
+        graphic.setFilled(true);
+
     }
 
     Building(){

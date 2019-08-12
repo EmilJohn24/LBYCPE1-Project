@@ -103,7 +103,7 @@ public class ServerThread extends Thread{
         try {
             sessionID = SessionManager.addSession(username, password);
             if (sessionID != 0){
-                return "LOGIN_SUCCESS" + ":" + String.valueOf(sessionID);
+                return "LOGIN_SUCCESS" + ":" + sessionID;
             }
             else{
                 return "INVALID_CREDENTIALS";
@@ -136,19 +136,32 @@ public class ServerThread extends Thread{
     //private final int LISTEN_TIMEOUT = 1000;
     //private int LISTEN_COUNT = 0;
 
-    private String listen() throws IOException{
+    private String listen() throws IOException {
         String request;
         while (true){
             //if (LISTEN_COUNT == LISTEN_TIMEOUT) break;
             request = input.readLine();
             if (request != null) return request;
+            if (!_socket.isConnected()) {
+                try {
+                    destroyThread();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
     public void close() throws IOException, InterruptedException {
         _socket.close();
+        ServerLog.globalLog("Connection closed:" + getID());
         this.join();
 
+    }
+
+    public void destroyThread() throws InterruptedException {
+        ServerLog.globalLog("Connection closed:" + getID());
+        this.join();
     }
 
     public void send(String message){
