@@ -53,6 +53,11 @@ public class StructureHandler {
     private final String descriptionIndicator = "description";
     private final String dateIndicator = "date";
     private final String slotIndicator = "slot";
+
+    public File getStructureFile(){
+        return structureFile;
+    }
+
     public StructureHandler(String fileName, UserDatabase users) throws ParserConfigurationException,
             IOException, SAXException, TransformerConfigurationException {
         this.tempDatabase = users;
