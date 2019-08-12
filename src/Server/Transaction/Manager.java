@@ -7,6 +7,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -37,6 +38,10 @@ public class Manager {
         } catch (TransformerConfigurationException e) {
             e.printStackTrace();
         }
+    }
+
+    public static File getStructureFile(){
+        return parser.getStructureFile();
     }
 
     public static String reserve(Account acc, String building, Integer floor, String room, int month, int day, int year, int hour, int minute) throws TransformerException, IOException, SAXException {
