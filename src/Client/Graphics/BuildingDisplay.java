@@ -25,6 +25,7 @@ public class BuildingDisplay extends GenericGraphicsWindow<Building> {
         //TEST
         nav.loadFloor(3);
         nav.displayCurrentFloor();
+        nav.runner();
 
     }
     public void run(){
