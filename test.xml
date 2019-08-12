@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <dlsu>
 	<building height="10" left="10" name="St. La Salle Hall" top="10" width="10">
-		<floor height="100" number="1" width="100">
-			<room height="30" left="10" name="LS206" top="10" width="30">
+		<floor height="100" number="3" width="100">
+			<room height="30" left="10" name="LS306" top="10" width="30">
 				<description>Very nice room</description>
 				<date day="30" month="2" year="1999">
 					<slot hour="12" minute="30">emil_lopez@dlsu.edu.ph</slot>

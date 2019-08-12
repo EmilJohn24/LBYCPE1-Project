@@ -1,4 +1,5 @@
 import Client.Client;
+import Client.Graphics.BuildingDisplay;
 import Server.Structures.*;
 import Server.Transaction.Account;
 import Server.Transaction.UserDatabase;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 public class Tests {
 
-    Client dummyClient;
+    private Client dummyClient;
 
     public Tests(){
         try {
@@ -31,7 +32,9 @@ public class Tests {
             StructureHandler testParse = new StructureHandler("test.xml", testDatabase);
             System.out.println(testParse.addReservation("St. La Salle Hall", 1, "LS206", 2, 30, 1999, 10, 30,testAccount));
             ArrayList<Building> result = testParse.parse();
-
+            BuildingDisplay buildingDisplay = new BuildingDisplay();
+            buildingDisplay.loadUpGraphics(result);
+            buildingDisplay.start();
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -63,9 +66,22 @@ public class Tests {
      
 
     @Test
-    public void roomRequestTest(){
-        dummyClient.sendRequest("GET_ROOM_DATA");
-        String response = dummyClient.getResponse();
-        System.out.println(response);
+    public void roomRequestTest() throws SAXException, ParserConfigurationException, TransformerConfigurationException, IOException {
+        dummyClient.loadRoomData();
+    }
+
+    @Test
+    public void loadBuildingTest(){
+        try {
+            dummyClient.loadBuildingGUI();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
