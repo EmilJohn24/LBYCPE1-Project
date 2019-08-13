@@ -46,12 +46,12 @@ public abstract class GenericGraphicsWindow<RS extends ResizableStruct>extends G
         addMouseListeners();
 
     }
-
+    private final double labelRatio = 0.7;
     public void loadUpGraphics(ArrayList<RS> structures){
         this.structures = structures;
         for (RS structure : structures){
             GRect tmp = structure.getGraphic();
-            GLabel tmpLabel = new GLabel(structure.getName(), structure.getLeft() + structure.getWidth(), structure.getTop() + structure.getHeight());
+            GLabel tmpLabel = new GLabel(structure.getName(), structure.getLeft() + structure.getWidth() * labelRatio, structure.getTop());
             this.addToGraphics(tmp);
             this.addToGraphics(tmpLabel);
         }

@@ -65,10 +65,10 @@ public  class GraphicClientEndConnector {
             case "ROOM_NOT_AVAILABLE":
                 JOptionPane.showMessageDialog(null, "This room is unavailable");
                 return;
-
-
-
         }
+
+
+
     }
     public static void loadUpBuildingGraphics(ArrayList<Building> buildings){
         buildingGUI.loadUpGraphics(buildings);

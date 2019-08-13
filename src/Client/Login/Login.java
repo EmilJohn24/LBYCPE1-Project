@@ -129,7 +129,7 @@ public class Login extends javax.swing.JFrame {
 
         else if(id.equals("LOGIN_FAILED")){
             //TODO: handle shit
-            JOptionPane.showMessageDialog(null, "Fatal error encountered");
+            JOptionPane.showMessageDialog(null, "Invalid username or password");
 
         }
 

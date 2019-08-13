@@ -1,19 +1,14 @@
 package Client.Graphics;
 
 import Server.Structures.Building;
-import Server.Structures.ResizableStruct;
 
 
 public class BuildingDisplay extends GenericGraphicsWindow<Building> {
-    private Building lastExploredBuilding;
     private BuildingNavigator nav;
     public BuildingDisplay(){
         super();
     }
 
-    public Building getLastExploredBuilding(){
-        return lastExploredBuilding;
-    }
 
     public BuildingNavigator getNav(){
         return nav;
