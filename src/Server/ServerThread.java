@@ -46,7 +46,7 @@ public class ServerThread extends Thread{
     //INVALID_CREDENTIALS
     //RANDOM_NETWORK_ERROR
     //ROOM_NOT_AVAILABLE
-    private String process(String request){
+    private String process(String request) {
 
         ServerLog.globalLog("Processing message: " + request);
         String[] requestComponents = request.split(":");
@@ -55,11 +55,26 @@ public class ServerThread extends Thread{
         if (requestComponents.length > 1)  params = requestComponents[1].split(",");
         switch (requestID){
             case "LOGIN":
+                System.out.println(params[1]);
                 return loginRequestHandler(params[0], params[1]);
             case "GET_ROOM_DATA":
                 return roomRequestHandler(); //send xml via manager request. Return ID indicating the transfer is complete
             case "RESERVE":
                 return reservationHandler(params[0], params[1], params[2], params[3], params[4], params[5], params[6], params[7], params[8]); //
+            case "DISCONNECT":
+                try {
+                    close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    try {
+                        destroyThread();
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                break;
         }
 
         return null;
