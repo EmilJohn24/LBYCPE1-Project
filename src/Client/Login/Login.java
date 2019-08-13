@@ -37,7 +37,7 @@ public class Login extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() throws IOException {
-        clientHolder = new Client("127.0.0.1", 4400);
+        clientHolder = new Client("192.168.43.90", 4400);
         GraphicClientEndConnector.connectClient(clientHolder);
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();

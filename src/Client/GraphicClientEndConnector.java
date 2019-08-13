@@ -5,6 +5,7 @@ import Client.Picker.Picker;
 import Server.Structures.Building;
 import Server.Structures.Floor;
 import Server.Structures.Room;
+import acm.graphics.GObject;
 import org.xml.sax.SAXException;
 
 import javax.swing.*;
@@ -58,7 +59,8 @@ public  class GraphicClientEndConnector {
         switch(response){
             case "RESERVATION_COMPLETE":
                 JOptionPane.showMessageDialog(null, "Reservation successful");
-                RoomReservationClient.main(null);
+                //RoomReservationClient.main(null);
+                System.exit(0);
             case "SLOT_NOT_FOUND":
                 JOptionPane.showMessageDialog(null, "Please select an existing slot");
                 return;
@@ -69,6 +71,10 @@ public  class GraphicClientEndConnector {
 
 
 
+    }
+
+    public static void addGraphic(GObject g){
+        buildingGUI.add(g);
     }
     public static void loadUpBuildingGraphics(ArrayList<Building> buildings){
         buildingGUI.loadUpGraphics(buildings);

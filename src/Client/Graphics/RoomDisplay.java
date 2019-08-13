@@ -3,6 +3,7 @@ package Client.Graphics;
 import Client.GraphicClientEndConnector;
 import Server.Structures.Room;
 import Server.Structures.RoomSlot;
+import acm.graphics.GLabel;
 import acm.graphics.GObject;
 import acm.graphics.GRect;
 
@@ -26,14 +27,21 @@ public class RoomDisplay extends GenericGraphicsWindow<Room> {
             container = this.getElement(i);
             if (container instanceof GRect){
                 Room currentRoom = getStructWithGRect((GRect) container);
+                System.out.println(currentRoom.getName());
                 Hashtable<Calendar, RoomSlot> roomSlots = currentRoom.getSlots();
+                double x = currentRoom.getGraphic().getX();
+                double y = currentRoom.getGraphic().getY();
+
                 if(!roomSlots.containsKey(compare)){
+                    GraphicClientEndConnector.addGraphic(new GLabel("NOT AVAILABLE", x, y));
                     currentRoom.getGraphic().setFillColor(Color.GRAY);
-                }
+                                    }
                 else if (roomSlots.get(compare).isEmpty()) {
+                    GraphicClientEndConnector.addGraphic(new GLabel("AVAILABLE", x, y));
                     currentRoom.getGraphic().setFillColor(Color.GREEN);
                 }
                 else{
+                    GraphicClientEndConnector.addGraphic(new GLabel("TAKEN", x, y));
                     currentRoom.getGraphic().setFillColor(Color.RED);
                 }
                 currentRoom.getGraphic().setFilled(true);
