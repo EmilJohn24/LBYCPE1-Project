@@ -43,9 +43,9 @@ public class Manager {
     public static File getStructureFile(){
         return parser.getStructureFile();
     }
-
-    public static String reserve(Account acc, String building, Integer floor, String room, int month, int day, int year, int hour, int minute) throws TransformerException, IOException, SAXException {
-        String response =  parser.addReservation(building, floor, room, month, day, year, hour, minute, acc);
+//String building, Integer floor, String room, int month, int day, int year, int hour, int minute, int length, Account user
+    public static String reserve(Account acc, String building, Integer floor, String room, int month, int day, int year, int hour, int minute, int duration) throws TransformerException, IOException, SAXException {
+        String response =  parser.addReservationTo(building, floor, room, month, day, year, hour, minute, duration, acc);
         return response;
     }
 }

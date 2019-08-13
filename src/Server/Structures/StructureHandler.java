@@ -5,6 +5,7 @@ import Server.Transaction.UserDatabase;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
+import javax.imageio.metadata.IIOMetadataNode;
 import javax.xml.parsers.*;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -15,6 +16,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.InvalidPropertiesFormatException;
 
 /*
@@ -22,11 +24,7 @@ import java.util.InvalidPropertiesFormatException;
     <building name="Razon" top="10" left="10" height="10" width="10">
         <floor number="1" height="100" width="100">
             <room top="10" left="10" width="30" height="30" name="Room">
-                <description>Very nice room</description>
-
-                <date day="30" month="12" year="1999">
-                    <slot hour="12" minute="30" >emil_lopez@dlsu.edu.ph</slot>
-                </date>
+                [month] [day] [year] [hour] [minute] [email] [reason]::::
             </room>
         </floor>
     </building>
@@ -80,8 +78,33 @@ public class StructureHandler {
     }
 
     //Looks up exact node to reservation to
-    //No checks will be performed here, do it lower in the stack
-    public String addReservation(String building, Integer floor, String room, int month, int day, int year, int hour, int minute, Account user) throws TransformerException, IOException, SAXException {
+/*    //No checks will be performed here, do it lower in the stack
+    public String addReservation(String building, Integer floor, String room, int month, int day, int year, int hour, int minute, Account user){
+
+        NodeList top = structureDoc.getElementsByTagName(buildingsIndicator);
+        for (int i = 0; i < top.getLength(); i++){
+            Element currentBuilding = (Element) top.item(i);
+            if (currentBuilding.getAttribute("name").equals(building)) {
+                NodeList floorLayer = currentBuilding.getChildNodes();
+                for (int j = 0; j < floorLayer.getLength(); j++) {
+                    Element currentFloor = (Element) floorLayer.item(j);
+                    if (getElementAsInt(currentFloor, "number") == floor){
+                        NodeList roomLayer = currentFloor.getChildNodes();
+                        for (int k = 0; k < roomLayer.getLength(); k++){
+                            Element currentRoom = (Element) roomLayer.item(k);
+                            if (currentRoom.getAttribute("name").equals(room)){
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return null;
+    }*/
+    private final static String reservationSep = "::::";
+
+    public Element lookup(String building, Integer floor, String room) throws TransformerException, IOException, SAXException{
         NodeList buildingNodes = structureDoc.getElementsByTagName(buildingsIndicator);
         for (int bCount = 0; bCount < buildingNodes.getLength(); bCount++){
 
@@ -97,29 +120,9 @@ public class StructureHandler {
                         for (int rCount = 0; rCount < roomNodes.getLength(); rCount++){
                             Element currentRoom = (Element) roomNodes.item(rCount);
                             if (room.equals(currentRoom.getAttribute("name"))){
+                                return currentRoom;
 
-                                NodeList dateNodes = currentRoom.getElementsByTagName(dateIndicator);
-                                for (int dCount = 0; dCount < dateNodes.getLength(); dCount++){
-                                    Element currentDate = (Element) dateNodes.item(dCount);
-                                    if (month == getElementAsInt(currentDate, "month") && day == getElementAsInt(currentDate, "day") && year == getElementAsInt(currentDate, "year")){
-                                        NodeList slotNodes = currentRoom.getElementsByTagName(slotIndicator);
 
-                                        for (int sCount = 0; sCount < slotNodes.getLength(); sCount++){
-                                            Element currentSlot = (Element) slotNodes.item(sCount);
-                                            if (hour == getElementAsInt(currentSlot, "hour") && minute == getElementAsInt(currentSlot, "minute")){
-                                                String reservation = currentSlot.getTextContent().trim();
-                                                if (!reservation.isEmpty()) return "ROOM_NOT_AVAILABLE";
-                                                else {
-                                                    currentSlot.setTextContent(user.getUsername());
-                                                    updateFile();
-                                                    return "RESERVATION_COMPLETE";
-                                                }
-                                            }
-                                        }
-                                        break;
-                                    }
-
-                                }
                             }
                         }
                         break;
@@ -129,7 +132,53 @@ public class StructureHandler {
                 break;
             }
         }
-        return "SLOT_NOT_FOUND";
+        return null;
+    }
+                //[month] [day] [year] [hour] [minute] [email] [reason]::::
+
+    public Calendar createComparatorDate(String formatText){
+        String[] dataStr = formatText.split(" ");
+        Integer[] data = new Integer[6];
+        for (int i = 0; i < dataStr.length; i++){
+            data[i] = Integer.parseInt(dataStr[i]);
+        }
+        Calendar newCalendar = Calendar.getInstance();
+        newCalendar.set(data[2], data[0], data[1], data[3], data[4], data[5]);
+        return newCalendar;
+
+    }
+
+    public boolean checkValidity(String reservation, String[] otherReservations, int maxLength){
+        Calendar reservationDate = createComparatorDate(reservation);
+        ArrayList<Calendar> comparisonCalendars = new ArrayList<>();
+        int difference;
+        double secondDifference;
+        for (Calendar c : comparisonCalendars){
+            difference = reservationDate.compareTo(c);
+            secondDifference = difference / 1000;
+            if (secondDifference < maxLength) return false;
+        }
+
+        return true;
+
+
+
+    }
+
+
+    public static void appendToReservation(Element e, String text){
+        e.setTextContent(e.getTextContent() + reservationSep + text);
+    }
+
+    public String addReservationTo(String building, Integer floor, String room, int month, int day, int year, int hour, int minute, int length, Account user) throws TransformerException, IOException, SAXException {
+        String newReservation = month + " " + day + " " + year + " " + hour + " " + minute + " " + user.getUsername();
+        Element matchingRoom = lookup(building, floor, room);
+        String[] otherReservations = matchingRoom.getTextContent().split(reservationSep);
+        if (checkValidity(newReservation, otherReservations, length)){
+            appendToReservation(matchingRoom, newReservation);
+            return "RESERVATION_COMPLETE";
+        }
+        else return "ROOM_NOT_AVAILABLE";
     }
 
     public void updateFile() throws TransformerException, IOException, SAXException {

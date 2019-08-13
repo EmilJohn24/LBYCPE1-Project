@@ -33,7 +33,7 @@ public class ServerThread extends Thread{
     //Normal Types:
     //LOGIN:[username],[password]
     //GET_ROOM_DATA
-    //RESERVE:[SESSIONID],[BUILDING NAME],[FLOOR],[ROOM],[MONTH],[DAY],[YEAR],[HOUR],[MINUTE]
+    //RESERVE:[SESSIONID],[BUILDING NAME],[FLOOR],[ROOM],[MONTH],[DAY],[YEAR],[HOUR],[MINUTE],[DURATION]
 
 
     //Returnable Messages:
@@ -51,7 +51,7 @@ public class ServerThread extends Thread{
         ServerLog.globalLog("Processing message: " + request);
         String[] requestComponents = request.split(":");
         String requestID = requestComponents[0];
-        String params[] = new String[10];
+        String params[] = new String[11];
         if (requestComponents.length > 1)  params = requestComponents[1].split(",");
         switch (requestID){
             case "LOGIN":
@@ -60,7 +60,7 @@ public class ServerThread extends Thread{
             case "GET_ROOM_DATA":
                 return roomRequestHandler(); //send xml via manager request. Return ID indicating the transfer is complete
             case "RESERVE":
-                return reservationHandler(params[0], params[1], params[2], params[3], params[4], params[5], params[6], params[7], params[8]); //
+                return reservationHandler(params[0], params[1], params[2], params[3], params[4], params[5], params[6], params[7], params[8], params[9]); //
             case "DISCONNECT":
                 try {
                     close();
@@ -99,9 +99,10 @@ public class ServerThread extends Thread{
         }
     }
 
-        private String reservationHandler(String sessionID, String building, String floor, String room, String month, String day, String year, String hour, String minute){
+        private String reservationHandler(String sessionID, String building, String floor, String room, String month, String day, String year, String hour, String minute, String duration){
         try {
-            return SessionManager.reserve(sessionID, building, floor, room, Integer.parseInt(month), Integer.parseInt(day), Integer.parseInt(year), Integer.parseInt(hour), Integer.parseInt(minute));
+            return SessionManager.reserve(sessionID, building, floor, room, Integer.parseInt(month), Integer.parseInt(day), Integer.parseInt(year), Integer.parseInt(hour), Integer.parseInt(minute),
+                    Integer.parseInt(duration));
         } catch (TransformerException e) {
             e.printStackTrace();
         } catch (SAXException e) {
