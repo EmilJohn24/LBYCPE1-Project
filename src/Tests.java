@@ -17,11 +17,11 @@ public class Tests {
     private Client dummyClient;
 
     public Tests(){
-        try {
+/*        try {
             dummyClient = new Client("127.0.0.1", 4400);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
     @Test
     public void xmlParseTest(){
@@ -30,7 +30,8 @@ public class Tests {
         Account testAccount = Account.pseudoLogin("emil_lopez@dlsu.edu.ph", testDatabase);
         try {
             StructureHandler testParse = new StructureHandler("test.xml", testDatabase);
-            System.out.println(testParse.addReservation("St. La Salle Hall", 1, "LS206", 2, 30, 1999, 10, 30,testAccount));
+            testParse.lookup("St. La Salle Hall", 3, "LS306");
+            System.out.println(testParse.addReservationTo("St. La Salle Hall", 3, "LS306", 1, 1, 1999, 1, 34, 20, testAccount));
             ArrayList<Building> result = testParse.parse();
             BuildingDisplay buildingDisplay = new BuildingDisplay();
             buildingDisplay.loadUpGraphics(result);

@@ -2,251 +2,74 @@
 	<building height="300" left="200" name="St. La Salle Hall" top="10" width="100">
 		<floor height="100" number="3" width="100">
 			<room height="30" left="10" name="LS306" top="10" width="30">
-				<description>Very nice room</description>
-				<date day="30" month="2" year="1999">
-					<slot hour="12" minute="30">emil_lopez@dlsu.edu.ph</slot>
-					<slot hour="11" minute="30">jet_chua@dlsu.edu.ph</slot>
-					<slot hour="10" minute="30">emil_lopez@dlsu.edu.ph</slot>
-				</date>
-			</room>
+				</room>
 		</floor>
 	</building>
 	
 	<building height="200" left="0" name="Velasco Hall" top="400" width="500">
 		<floor height="500" number="3" width="1000">
 			<room height="200" left="0" name="V301" top="300" width="100">
-				<description>Old room</description>
-				<date day="12" month="8" year="1999">
-					<slot hour="8" minute="30"></slot>
-					<slot hour="9" minute="30"></slot>
-					<slot hour="10" minute="30"></slot>
-					<slot hour="11" minute="30"></slot>
-					<slot hour="12" minute="30">josef_solis@dlsu.edu.ph</slot>
-					<slot hour="13" minute="30"></slot>
-					<slot hour="14" minute="30"></slot>
-				</date>
-			</room>
-
+			~~~~8 14 2019 3 16 30 emil_lopez@dlsu.edu.ph</room>
 			<room height="200" left="100" name="V302" top="300" width="100">
-				<description>Old room</description>
-				<date day="12" month="8" year="1999">
-					<slot hour="8" minute="30"></slot>
-					<slot hour="9" minute="30"></slot>
-					<slot hour="10" minute="30"></slot>
-					<slot hour="11" minute="30"></slot>
-					<slot hour="12" minute="30">josef_solis@dlsu.edu.ph</slot>
-					<slot hour="13" minute="30"></slot>
-					<slot hour="14" minute="30"></slot>
-				</date>
-			</room>
-
+			~~~~8 15 2019 3 2  30 emil_lopez@dlsu.edu.ph</room>
 			<room height="200" left="200" name="V303" top="300" width="100">
-				<description>Old room</description>
-				<date day="29" month="8" year="1999">
-					<slot hour="8" minute="30"></slot>
-					<slot hour="9" minute="30"></slot>
-					<slot hour="10" minute="30"></slot>
-					<slot hour="11" minute="30"></slot>
-					<slot hour="12" minute="30">josef_solis@dlsu.edu.ph</slot>
-					<slot hour="13" minute="30"></slot>
-					<slot hour="14" minute="30"></slot>
-				</date>
-			</room>
-
+			~~~~8 14 2019 3 22 30 emil_lopez@dlsu.edu.ph~~~~8 29 2019 3 30 30 emil_lopez@dlsu.edu.ph~~~~8 15 2019 3 51 30 emil_lopez@dlsu.edu.ph</room>
 			<room height="200" left="300" name="V304" top="300" width="100">
-				<description>Old room</description>
-				<date day="29" month="2" year="1999">
-					<slot hour="8" minute="30"></slot>
-					<slot hour="9" minute="30"></slot>
-					<slot hour="10" minute="30"></slot>
-					<slot hour="11" minute="30"></slot>
-					<slot hour="12" minute="30">josef_solis@dlsu.edu.ph</slot>
-					<slot hour="13" minute="30"></slot>
-					<slot hour="14" minute="30"></slot>
-				</date>
-			</room>
-
+			~~~~8 15 2019 3 42 30 emil_lopez@dlsu.edu.ph</room>
 			<room height="200" left="400" name="V305" top="300" width="100">
-				<description>Old room</description>
-				<date day="29" month="2" year="1999">
-					<slot hour="8" minute="30"></slot>
-					<slot hour="9" minute="30"></slot>
-					<slot hour="10" minute="30"></slot>
-					<slot hour="11" minute="30"></slot>
-					<slot hour="12" minute="30">josef_solis@dlsu.edu.ph</slot>
-					<slot hour="13" minute="30"></slot>
-					<slot hour="14" minute="30"></slot>
-				</date>
 			</room>
-
 			<room height="200" left="500" name="V306" top="300" width="100">
-				<description>Old room</description>
-				<date day="29" month="2" year="1999">
-					<slot hour="8" minute="30"></slot>
-					<slot hour="9" minute="30"></slot>
-					<slot hour="10" minute="30"></slot>
-					<slot hour="11" minute="30"></slot>
-					<slot hour="12" minute="30">josef_solis@dlsu.edu.ph</slot>
-					<slot hour="13" minute="30"></slot>
-					<slot hour="14" minute="30"></slot>
-				</date>
 			</room>
-
 			<room height="200" left="600" name="V307" top="300" width="100">
-				<description>Old room</description>
-				<date day="29" month="2" year="1999">
-					<slot hour="8" minute="30"></slot>
-					<slot hour="9" minute="30"></slot>
-					<slot hour="10" minute="30"></slot>
-					<slot hour="11" minute="30"></slot>
-					<slot hour="12" minute="30">josef_solis@dlsu.edu.ph</slot>
-					<slot hour="13" minute="30"></slot>
-					<slot hour="14" minute="30"></slot>
-				</date>
 			</room>
-
 			<room height="200" left="800" name="V308" top="300" width="100">
-				<description>Old room</description>
-				<date day="29" month="2" year="1999">
-					<slot hour="8" minute="30"></slot>
-					<slot hour="9" minute="30"></slot>
-					<slot hour="10" minute="30"></slot>
-					<slot hour="11" minute="30"></slot>
-					<slot hour="12" minute="30">josef_solis@dlsu.edu.ph</slot>
-					<slot hour="13" minute="30"></slot>
-					<slot hour="14" minute="30"></slot>
-				</date>
 			</room>
-
 			<room height="200" left="900" name="V309" top="300" width="100">
-				<description>Old room</description>
-				<date day="29" month="2" year="1999">
-					<slot hour="8" minute="30"></slot>
-					<slot hour="9" minute="30"></slot>
-					<slot hour="10" minute="30"></slot>
-					<slot hour="11" minute="30"></slot>
-					<slot hour="12" minute="30">josef_solis@dlsu.edu.ph</slot>
-					<slot hour="13" minute="30"></slot>
-					<slot hour="14" minute="30"></slot>
-				</date>
 			</room>
-
 			<room height="200" left="1000" name="V310" top="300" width="100">
-				<description>Old room</description>
-				<date day="29" month="2" year="1999">
-					<slot hour="8" minute="30"></slot>
-					<slot hour="9" minute="30"></slot>
-					<slot hour="10" minute="30"></slot>
-					<slot hour="11" minute="30"></slot>
-					<slot hour="12" minute="30">josef_solis@dlsu.edu.ph</slot>
-					<slot hour="13" minute="30"></slot>
-					<slot hour="14" minute="30"></slot>
-				</date>
 			</room>
-
 			<room height="200" left="0" name="V301" top="300" width="100">
-				<description>Old room</description>
-				<date day="29" month="2" year="1999">
-					<slot hour="8" minute="30"></slot>
-					<slot hour="9" minute="30"></slot>
-					<slot hour="10" minute="30"></slot>
-					<slot hour="11" minute="30"></slot>
-					<slot hour="12" minute="30">josef_solis@dlsu.edu.ph</slot>
-					<slot hour="13" minute="30"></slot>
-					<slot hour="14" minute="30"></slot>
-				</date>
 			</room>
 		</floor>
-
 		<floor height="100" number="4" width="100">
 			<room height="30" left="20" name="V407" top="20" width="30">
-				<description>Old room</description>
-				<date day="27" month="2" year="1999">
-					<slot hour="12" minute="30"/>
-					<slot hour="11" minute="30">emil_lopez@dlsu.edu.ph</slot>
-				</date>
 			</room>
 		</floor>
 	</building>
-
-
 	<building height="100" left="200" name="Miguel Hall" top="700" width="400">
 		<floor height="100" number="3" width="100">
 			<room height="30" left="10" name="LS306" top="10" width="30">
-				<description>Very nice room</description>
-				<date day="30" month="2" year="1999">
-					<slot hour="12" minute="30">emil_lopez@dlsu.edu.ph</slot>
-					<slot hour="11" minute="30">jet_chua@dlsu.edu.ph</slot>
-					<slot hour="10" minute="30">emil_lopez@dlsu.edu.ph</slot>
-				</date>
 			</room>
 		</floor>
 	</building>
-
-
 	<building height="50" left="400" name="Mutien Marie Hall" top="900" width="300">
 		<floor height="100" number="3" width="100">
 			<room height="30" left="10" name="LS306" top="10" width="30">
-				<description>Very nice room</description>
-				<date day="30" month="2" year="1999">
-					<slot hour="12" minute="30">emil_lopez@dlsu.edu.ph</slot>
-					<slot hour="11" minute="30">jet_chua@dlsu.edu.ph</slot>
-					<slot hour="10" minute="30">emil_lopez@dlsu.edu.ph</slot>
-				</date>
 			</room>
 		</floor>
 	</building>
-
 	<building height="400" left="600" name="St. Joseph Hall" top="450" width="200">
 		<floor height="100" number="3" width="100">
 			<room height="30" left="10" name="LS306" top="10" width="30">
-				<description>Very nice room</description>
-				<date day="30" month="2" year="1999">
-					<slot hour="12" minute="30">emil_lopez@dlsu.edu.ph</slot>
-					<slot hour="11" minute="30">jet_chua@dlsu.edu.ph</slot>
-					<slot hour="10" minute="30">emil_lopez@dlsu.edu.ph</slot>
-				</date>
 			</room>
 		</floor>
 	</building>
-
 	<building height="10" left="10" name="St. La Salle Hall" top="10" width="10">
 		<floor height="100" number="3" width="100">
 			<room height="30" left="10" name="LS306" top="10" width="30">
-				<description>Very nice room</description>
-				<date day="30" month="2" year="1999">
-					<slot hour="12" minute="30">emil_lopez@dlsu.edu.ph</slot>
-					<slot hour="11" minute="30">jet_chua@dlsu.edu.ph</slot>
-					<slot hour="10" minute="30">emil_lopez@dlsu.edu.ph</slot>
-				</date>
 			</room>
 		</floor>
 	</building>
-
 	<building height="10" left="10" name="St. La Salle Hall" top="10" width="10">
 		<floor height="100" number="3" width="100">
 			<room height="30" left="10" name="LS306" top="10" width="30">
-				<description>Very nice room</description>
-				<date day="30" month="2" year="1999">
-					<slot hour="12" minute="30">emil_lopez@dlsu.edu.ph</slot>
-					<slot hour="11" minute="30">jet_chua@dlsu.edu.ph</slot>
-					<slot hour="10" minute="30">emil_lopez@dlsu.edu.ph</slot>
-				</date>
 			</room>
 		</floor>
 	</building>
-
 	<building height="10" left="10" name="St. La Salle Hall" top="10" width="10">
 		<floor height="100" number="3" width="100">
 			<room height="30" left="10" name="LS306" top="10" width="30">
-				<description>Very nice room</description>
-				<date day="30" month="2" year="1999">
-					<slot hour="12" minute="30">emil_lopez@dlsu.edu.ph</slot>
-					<slot hour="11" minute="30">jet_chua@dlsu.edu.ph</slot>
-					<slot hour="10" minute="30">emil_lopez@dlsu.edu.ph</slot>
-				</date>
 			</room>
 		</floor>
 	</building>
-
 </dlsu>

@@ -1,16 +1,21 @@
 package Client;
 
 import Client.Graphics.BuildingDisplay;
+import Client.Graphics.RoomDisplay;
 import Client.Picker.Picker;
+import Client.Receipt.DRRMSReceipt;
 import Server.Structures.Building;
 import Server.Structures.Floor;
 import Server.Structures.Room;
+import Server.Structures.StructureHandler;
 import acm.graphics.GObject;
+import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,6 +29,7 @@ public  class GraphicClientEndConnector {
     private static Room currentRoom;
     private static BuildingDisplay buildingGUI;
     private static Picker picker;
+    private static RoomDisplay roomGUI;
     public static void connectClient(Client c){
         topClient = c;
     }
@@ -32,6 +38,8 @@ public  class GraphicClientEndConnector {
     private static int year;
     private static int hour;
     private static int minute;
+    private static int duration;
+    private static DRRMSReceipt receipt;
 
     public static Integer[] getDateInArrayForm(){
         Integer[] date = new Integer[5];
@@ -43,24 +51,54 @@ public  class GraphicClientEndConnector {
         return date;
     }
 
+    public static Picker getPicker(){
+        return picker;
+    }
+    public static int getDuration(){
+        return duration;
+    }
 
-    public static void changeTime(int month, int day, int year, int hour, int minute){
+    public static void connectRoomGUI(RoomDisplay roomDisplay){
+        roomGUI = roomDisplay;
+    }
+
+    public static RoomDisplay getRoomGUI(){
+        return roomGUI;
+    }
+
+    public static void changeTime(int month, int day, int year, int hour, int minute, int duration) {
         GraphicClientEndConnector.month = month;
         GraphicClientEndConnector.day = day;
         GraphicClientEndConnector.year = year;
         GraphicClientEndConnector.hour = hour;
         GraphicClientEndConnector.minute = minute;
+        GraphicClientEndConnector.duration = duration;
+
+        try {
+            getRoomGUI().colorizer(month, day, year, hour, minute, duration);
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
 
     public static void processReservation(){
-        String response = topClient.sendReservationRequest(currentBuilding.getName(), currentFloor, currentRoom.getName(), month, day, year, hour, minute);
+        //
+        loadReceipt();
+        String response = topClient.sendReservationRequest(currentBuilding.getName(), currentFloor, currentRoom.getName(), month, day, year, hour, minute, duration);
         switch(response){
             case "RESERVATION_COMPLETE":
                 JOptionPane.showMessageDialog(null, "Reservation successful");
+                picker.stop();
                 //RoomReservationClient.main(null);
-                System.exit(0);
+                //System.exit(0);
+                while(true);
             case "SLOT_NOT_FOUND":
                 JOptionPane.showMessageDialog(null, "Please select an existing slot");
                 return;
@@ -75,6 +113,7 @@ public  class GraphicClientEndConnector {
 
     public static void addGraphic(GObject g){
         buildingGUI.add(g);
+        buildingGUI.repaint();
     }
     public static void loadUpBuildingGraphics(ArrayList<Building> buildings){
         buildingGUI.loadUpGraphics(buildings);
@@ -116,12 +155,22 @@ public  class GraphicClientEndConnector {
 
     }
 
+    public static void loadReceipt(){
+
+        String datetime = month + "/" + day + "/" + year + " " + hour + ":" + minute;
+        java.awt.EventQueue.invokeLater(() -> {
+            System.out.println("Fuck");
+            receipt.displayinformation(getUsername(), currentRoom.getName(), datetime, "", String.valueOf(topClient.getSessionID()));
+            receipt.setVisible(true);
+        });
+
+    }
 
     public static Client getClientReference(){
         return topClient;
     }
 
-    public static void displayNewFloor(int floor){
+    public static void displayNewFloor(int floor) throws TransformerException, IOException, SAXException {
         buildingGUI.getNav().loadFloor(floor);
     }
 
@@ -129,6 +178,7 @@ public  class GraphicClientEndConnector {
     static{
         buildingGUI = new BuildingDisplay();
         picker = new Picker();
+        receipt = new DRRMSReceipt();
     }
 
     public static Building getCurrentBuilding() {
@@ -143,7 +193,7 @@ public  class GraphicClientEndConnector {
         return currentFloor;
     }
 
-    public static void setCurrentFloor(int currentFloor) {
+    public static void setCurrentFloor(int currentFloor) throws TransformerException, IOException, SAXException {
         GraphicClientEndConnector.currentFloor = currentFloor;
         displayNewFloor(currentFloor);
     }
@@ -152,6 +202,17 @@ public  class GraphicClientEndConnector {
         return currentRoom;
     }
 
+    public static String getUsername(){
+        return topClient.requestUsername();
+    }
+    public static boolean checkIfAvailable(int month, int day, int year, int hour, int minute, int length, String roomName) throws TransformerException, IOException, SAXException {
+        String newReservation = month + " " + day + " " + year + " " + hour + " " + minute + " "  + length + " " + topClient.requestUsername();
+        Node room = topClient.getStructHandler().lookup(currentBuilding.getName(), currentFloor, roomName);
+        if (room == null) return false;
+        String separator = StructureHandler.getReservationSep();
+        return topClient.getStructHandler().checkValidity(newReservation, room.getTextContent().trim().split(separator), length);
+
+    }
     public static void setCurrentRoom(Room currentRoom) {
         GraphicClientEndConnector.currentRoom = currentRoom;
     }

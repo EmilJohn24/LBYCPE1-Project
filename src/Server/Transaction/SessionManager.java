@@ -33,6 +33,12 @@ public class SessionManager {
         return hash;
     }
 
+
+    public static String getUsername(Integer sessionID){
+        Account tmp = sessions.get(sessionID);
+        return tmp.getUsername();
+    }
+
     public static File getStructureFile(){
         return Manager.getStructureFile();
     }

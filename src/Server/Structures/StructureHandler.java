@@ -14,17 +14,16 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.InvalidPropertiesFormatException;
+import java.util.*;
+
+//Fake pair class
 
 /*
 <dlsu>
     <building name="Razon" top="10" left="10" height="10" width="10">
         <floor number="1" height="100" width="100">
             <room top="10" left="10" width="30" height="30" name="Room">
-                [month] [day] [year] [hour] [minute] [email] [reason]::::
+                [month] [day] [year] [hour] [minute] [duration] [email] [reason]::::
             </room>
         </floor>
     </building>
@@ -48,9 +47,9 @@ public class StructureHandler {
     private final String buildingsIndicator = "building";
     private final String floorIndicator = "floor";
     private final String roomIndicator = "room";
-    private final String descriptionIndicator = "description";
-    private final String dateIndicator = "date";
-    private final String slotIndicator = "slot";
+//    private final String descriptionIndicator = "description";
+//    private final String dateIndicator = "date";
+//    private final String slotIndicator = "slot";
 
     public File getStructureFile(){
         return structureFile;
@@ -102,7 +101,11 @@ public class StructureHandler {
 
         return null;
     }*/
-    private final static String reservationSep = "::::";
+    private final static String reservationSep = "~~~~";
+
+    public static String getReservationSep(){
+        return reservationSep;
+    }
 
     public Element lookup(String building, Integer floor, String room) throws TransformerException, IOException, SAXException{
         NodeList buildingNodes = structureDoc.getElementsByTagName(buildingsIndicator);
@@ -134,29 +137,71 @@ public class StructureHandler {
         }
         return null;
     }
-                //[month] [day] [year] [hour] [minute] [email] [reason]::::
+                //[month] [day] [year] [hour] [minute] [duration] [email] [reason]::::
+                //   0      1      2      3       4          5       6        7
 
-    public Calendar createComparatorDate(String formatText){
-        String[] dataStr = formatText.split(" ");
+    public Pair<String, Calendar> createComparatorDate(String formatText){
+        if (formatText.isBlank()) return null; //Bad error handling but whatever man -Lopez
+        String[] dataStr = formatText.split(" ", 7);
+        if (dataStr.length != 7) return null;
+        String email = dataStr[5];
         Integer[] data = new Integer[6];
-        for (int i = 0; i < dataStr.length; i++){
+        for (int i = 0; i < 5 ; i++){ //  5 is the email's index
             data[i] = Integer.parseInt(dataStr[i]);
         }
         Calendar newCalendar = Calendar.getInstance();
-        newCalendar.set(data[2], data[0], data[1], data[3], data[4], data[5]);
-        return newCalendar;
+        newCalendar.set(data[2], data[0], data[1], data[3], data[4]);
+        Pair<String, Calendar> newPair = new Pair<>(email, newCalendar);
+        return newPair;
 
     }
+    public Integer getDurationOfReservation(String formatText){
+        if (formatText.length() == 0) return null;
+        return Integer.parseInt(formatText.split(" ")[5]);
+    }
 
+    public ArrayList<Pair<String, Calendar> > createComparatorDates(String[] dates){
+        ArrayList<Pair<String, Calendar>> comparatorDates = new ArrayList<>();
+        for (String date : dates){
+            Pair<String, Calendar> tmp = createComparatorDate(date);
+            if (tmp == null) continue;
+            else comparatorDates.add(tmp);
+        }
+
+        return comparatorDates;
+
+    }
     public boolean checkValidity(String reservation, String[] otherReservations, int maxLength){
-        Calendar reservationDate = createComparatorDate(reservation);
-        ArrayList<Calendar> comparisonCalendars = new ArrayList<>();
-        int difference;
-        double secondDifference;
-        for (Calendar c : comparisonCalendars){
-            difference = reservationDate.compareTo(c);
-            secondDifference = difference / 1000;
-            if (secondDifference < maxLength) return false;
+
+        Pair<String, Calendar>  reservationInfo = createComparatorDate(reservation);
+        Calendar reservationDate = reservationInfo.getSecond();
+        ArrayList<Pair<String, Calendar> > comparisonCalendars = createComparatorDates(otherReservations);
+        long frontDifference, frontEnd , frontStart;
+        long backDifference, backEnd, backStart;
+        double frontSecondDifference, backSecondDifference;
+        int indexTracker = 0;
+        for (Pair<String, Calendar>  c : comparisonCalendars){
+            Calendar comparison = c.getSecond();
+            Calendar backComparison = (Calendar) comparison.clone();
+            //Sins were committed here. Do not touch or suffer the consequences -Lopez
+            Integer duration = getDurationOfReservation(otherReservations[indexTracker]);
+            indexTracker++;
+            if (comparison == null || backComparison == null || duration == null) continue;
+
+            backComparison.add(Calendar.MINUTE, duration);
+
+            frontEnd = comparison.getTimeInMillis();
+            frontStart = reservationDate.getTimeInMillis();
+            frontDifference = frontEnd - frontStart;
+            frontSecondDifference = frontDifference / 60000; //minute difference
+
+            backEnd = reservationDate.getTimeInMillis();
+            backStart = backComparison.getTimeInMillis();
+            backDifference = backEnd - backStart;
+            backSecondDifference = backDifference / 60000;
+            System.out.println(frontSecondDifference + "." + backSecondDifference);
+
+            if ((frontSecondDifference < maxLength && frontDifference > 0) || (backSecondDifference < 0) && -backSecondDifference < duration) return false;
         }
 
         return true;
@@ -166,16 +211,17 @@ public class StructureHandler {
     }
 
 
-    public static void appendToReservation(Element e, String text){
+    public void appendToReservation(Element e, String text) throws TransformerException, IOException, SAXException {
         e.setTextContent(e.getTextContent() + reservationSep + text);
+        updateFile();
     }
 
     public String addReservationTo(String building, Integer floor, String room, int month, int day, int year, int hour, int minute, int length, Account user) throws TransformerException, IOException, SAXException {
-        String newReservation = month + " " + day + " " + year + " " + hour + " " + minute + " " + user.getUsername();
+        String newReservation = month + " " + day + " " + year + " " + hour + " " + minute + " "  + length + " " + user.getUsername();
         Element matchingRoom = lookup(building, floor, room);
-        String[] otherReservations = matchingRoom.getTextContent().split(reservationSep);
+        String[] otherReservations = matchingRoom.getTextContent().trim().split(reservationSep);
         if (checkValidity(newReservation, otherReservations, length)){
-            appendToReservation(matchingRoom, newReservation);
+            this.appendToReservation(matchingRoom, newReservation);
             return "RESERVATION_COMPLETE";
         }
         else return "ROOM_NOT_AVAILABLE";
@@ -245,18 +291,27 @@ public class StructureHandler {
             Room newRoom = new Room();
             newRoom.setName(currentRoom.getAttribute("name"));
             resizeStructWithXMLAttribs(newRoom, currentRoom);
-            Element descriptor = (Element) currentRoom.
-                        getElementsByTagName(descriptionIndicator).item(0);
-            newRoom.setDescription(descriptor.getNodeValue());
-            chuckSlots(newRoom, currentRoom.getElementsByTagName(dateIndicator));
+//            Element descriptor = (Element) currentRoom.
+//                        getElementsByTagName(descriptionIndicator).item(0);
+            //newRoom.setDescription(descriptor.getNodeValue());
+            chuckSlots(newRoom,currentRoom);
             newFloor.addRoom(newRoom);
 
 
         }
     }
 
-    private void chuckSlots(Room newRoom, NodeList dates){
-        for (int dCount = 0; dCount < dates.getLength(); dCount++){
+    private void chuckSlots(Room newRoom, Node roomReservationNode){
+        String data = roomReservationNode.getTextContent().trim();
+        String[] reservationData = data.split(reservationSep);
+        ArrayList<Pair<String, Calendar>> slots = createComparatorDates(reservationData);
+        for (Pair<String, Calendar> slot : slots){
+            String email = slot.getFirst();
+            Calendar date = slot.getSecond();
+            Account transientLogin = Account.pseudoLogin(email, tempDatabase);
+            if (transientLogin != null) newRoom.fillSlot(transientLogin, date);
+        }
+/*        for (int dCount = 0; dCount < dates.getLength(); dCount++){
             Element currentDate = (Element) dates.item(dCount);
             int day = getElementAsInt(currentDate, "day");
             int month = getElementAsInt(currentDate, "month");
@@ -273,6 +328,6 @@ public class StructureHandler {
                 if (transientLogin != null) newRoom.fillSlot(transientLogin, month, day, year, hour, minute);
                 else newRoom.addEmptySlot(month, day, year, hour, minute);
             }
-        }
+        }*/
     }
 }

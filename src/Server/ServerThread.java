@@ -17,6 +17,7 @@ public class ServerThread extends Thread{
     private PrintWriter output;
     private BufferedReader input;
     private Integer sessionID;
+    private boolean dead;
     public ServerThread(Socket socket) throws IOException{
         super("Thread::" + socket.getInetAddress());
         this._socket = socket;
@@ -61,6 +62,8 @@ public class ServerThread extends Thread{
                 return roomRequestHandler(); //send xml via manager request. Return ID indicating the transfer is complete
             case "RESERVE":
                 return reservationHandler(params[0], params[1], params[2], params[3], params[4], params[5], params[6], params[7], params[8], params[9]); //
+            case "REQUEST_USER_NAME":
+                return usernameRequestHandler(params[0]);
             case "DISCONNECT":
                 try {
                     close();
@@ -79,14 +82,17 @@ public class ServerThread extends Thread{
 
         return null;
     }
-
+    private String usernameRequestHandler(String sessionID){
+        Integer sessionIDNum = Integer.parseInt(sessionID);
+        return SessionManager.getUsername(sessionIDNum);
+    }
     private String roomRequestHandler() {
         File structureFile = SessionManager.getStructureFile();
         String dataLine;
         String data = "ROOM_DATA:";
         try {
             BufferedReader structureFileReader = new BufferedReader(new FileReader(structureFile));
-            while ((dataLine = structureFileReader.readLine()) != null) {
+            while ((dataLine = structureFileReader.readLine()) != null && dataLine.length() != 0) {
                 data += dataLine;
             }
             return data;
@@ -138,6 +144,7 @@ public class ServerThread extends Thread{
         try {
             while (true) {
                 request = listen();
+                if (request == null) return;
                 message = process(request);
                 send(message);
             }
@@ -158,26 +165,31 @@ public class ServerThread extends Thread{
             //if (LISTEN_COUNT == LISTEN_TIMEOUT) break;
             request = input.readLine();
             if (request != null) return request;
-            if (!_socket.isConnected()) {
+            if (this.isDead()) {
                 try {
-                    destroyThread();
+                    close();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                return null;
             }
+
         }
+    }
+
+    public boolean isDead() throws IOException {
+        dead = _socket.getInetAddress().isReachable(1000);
+        return dead;
     }
 
     public void close() throws IOException, InterruptedException {
         _socket.close();
         ServerLog.globalLog("Connection closed:" + getID());
-        this.join();
-
+        destroyThread();
     }
 
     public void destroyThread() throws InterruptedException {
-        ServerLog.globalLog("Connection closed:" + getID());
-        this.join();
+        this.interrupt();
     }
 
     public void send(String message){

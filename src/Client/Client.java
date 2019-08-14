@@ -28,7 +28,9 @@ public class Client {
                                                                 // I recommend creating a function for loading this that requests password-less database transfer
 
     }
-
+    public StructureHandler getStructHandler(){
+        return handler;
+    }
     public void sendRequest(String requestStr) {
         _socket.sendRequest(requestStr);
     }
@@ -81,12 +83,18 @@ public class Client {
         return null;
     }
     public String sendReservationRequest(String building, int floor, String room,
-                                int month, int day, int year, int hour, int minute){
+                                int month, int day, int year, int hour, int minute, int duration){
         sendRequest("RESERVE:" + sessionID + "," + building + "," + floor + "," + room + "," + month + "," + day + "," + year + ","
-                    + hour + "," + minute);
+                    + hour + "," + minute + "," + duration);
         return getResponse();
 
     }
+
+    public String requestUsername(){
+        sendRequest("REQUEST_USER_NAME:" + getSessionID());
+        return getResponse();
+    }
+
     public int getSessionID() {
         return sessionID;
     }

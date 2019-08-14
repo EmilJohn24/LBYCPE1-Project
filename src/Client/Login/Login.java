@@ -37,8 +37,7 @@ public class Login extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() throws IOException {
-        clientHolder = new Client("192.168.43.90", 4400);
-        GraphicClientEndConnector.connectClient(clientHolder);
+        clientHolder = GraphicClientEndConnector.getClientReference();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
@@ -112,7 +111,7 @@ public class Login extends javax.swing.JFrame {
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
         String _username = username.getText();
-        String _password = password.getText(); //consider removing
+        String _password = password.getText(); //consider removing. THis might get removed but for simplicity's sake, I chose to keep it -Lopez
         clientHolder.sendRequest("LOGIN:" + _username + "," + _password);
         String response = clientHolder.getResponse();
         String[] responseComponents = response.split(":");

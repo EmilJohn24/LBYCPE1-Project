@@ -66,16 +66,21 @@ public class Room implements ResizableStruct{
         return newDate;
     }
 
-    public void addEmptySlot(int month, int day, int year, int hour, int minute){
-        Calendar newDate = Room.turnToTime(month, day, year, hour, minute);
-        RoomSlot newSlot = new RoomSlot();
-        slots.putIfAbsent(newDate, newSlot); //TODO: Note possible compatibility issues. Look up later
-    }
+    //function now useless
+//    public void addEmptySlot(int month, int day, int year, int hour, int minute){
+//        Calendar newDate = Room.turnToTime(month, day, year, hour, minute);
+//        RoomSlot newSlot = new RoomSlot();
+//        slots.putIfAbsent(newDate, newSlot); //TODO: Note possible compatibility issues. Look up later
+//    }
 
     public void fillSlot(Account user, int month, int day, int year, int hour, int minute){
         Calendar newDate = Room.turnToTime(month, day, year, hour, minute);
         slots.put(newDate, new RoomSlot(user));
 
+    }
+
+    public void fillSlot(Account user, Calendar date){
+        slots.put(date, new RoomSlot(user));
     }
 
 

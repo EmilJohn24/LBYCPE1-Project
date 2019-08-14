@@ -15,6 +15,7 @@ public abstract class GenericGraphicsWindow<RS extends ResizableStruct>extends G
     private ArrayList<RS> structures;
     public void addToGraphics(GObject graphic){
         add(graphic);
+        this.repaint();
     }
 
     public ArrayList<RS> getStructures(){

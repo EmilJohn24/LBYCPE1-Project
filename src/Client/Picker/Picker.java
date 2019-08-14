@@ -7,10 +7,26 @@ package Client.Picker;
  */
 
 import Client.GraphicClientEndConnector;
+import Client.RoomReservationClient;
+import com.github.lgooddatepicker.components.DateTimePicker;
+import com.github.lgooddatepicker.optionalusertools.DateTimeChangeListener;
+import com.github.lgooddatepicker.zinternaltools.DateTimeChangeEvent;
+import org.jdesktop.swingx.JXDatePicker;
+import org.xml.sax.SAXException;
 
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
+import javax.xml.transform.TransformerException;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -24,6 +40,7 @@ public class Picker extends javax.swing.JFrame {
      * Creates new form Picker
      */
     public Picker() {
+        super("Floor Picker");
         initComponents();
     }
 
@@ -35,14 +52,15 @@ public class Picker extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         floorPicker = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         month = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
-
+        newDuration = new javax.swing.JLabel();
+        duration = new javax.swing.JTextField();
+        datePicker = new DateTimePicker();
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
+        datePicker.setForeground(Color.WHITE);
         floorPicker.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 floorPickerItemStateChanged(evt);
@@ -50,20 +68,36 @@ public class Picker extends javax.swing.JFrame {
         });
         floorPicker.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                floorPickerActionPerformed(evt);
+                try {
+                    floorPickerActionPerformed(evt);
+                } catch (TransformerException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                }
             }
         });
-
+        datePicker.setDateTimePermissive(LocalDateTime.now());
         jLabel1.setText("Floor");
-
+        newDuration.setText("Duration of Reservation");
+        duration.setText("30");
         month.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, new java.util.Date(), java.util.Calendar.MINUTE));
-        month.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                monthStateChanged(evt);
-            }
-        });
+
 
         jLabel2.setText("Date and Time");
+
+        datePicker.addDateTimeChangeListener(new DateTimeChangeListener() {
+            @Override
+            public void dateOrTimeChanged(DateTimeChangeEvent dateTimeChangeEvent) {
+                dateChange();
+            }
+        }
+    );
+
+
+        duration.setText("30");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,8 +113,17 @@ public class Picker extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addComponent(floorPicker, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                .addComponent(month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(72, 72, 72))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(227, 227, 227)
+                        .addComponent(duration))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(219, 219, 219)
+                        .addComponent(newDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,42 +135,51 @@ public class Picker extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(floorPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(82, Short.MAX_VALUE))
+                    .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(duration)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(newDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void centralChangeHandler(){
+    private void centralChangeHandler() throws TransformerException, IOException, SAXException {
         //TODO
         Integer newValue = floorPicker.getItemAt(floorPicker.getSelectedIndex());
-        monthStateChanged(new ChangeEvent(month));
+        dateChange();
         System.out.println("Changing floor to:" + newValue);
         GraphicClientEndConnector.setCurrentFloor(newValue);
 
     }
     
-    private void floorPickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_floorPickerActionPerformed
+    private void floorPickerActionPerformed(java.awt.event.ActionEvent evt) throws TransformerException, IOException, SAXException {//GEN-FIRST:event_floorPickerActionPerformed
         centralChangeHandler();
         
     }//GEN-LAST:event_floorPickerActionPerformed
 
-    private void monthStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_monthStateChanged
+    private void dateChange(){
+        LocalDateTime newDate = datePicker.getDateTimePermissive();
+        LocalDate checkDate = datePicker.getDatePicker().getDate();
+        LocalTime checkTime = datePicker.getTimePicker().getTime();
+        if (newDate == null || checkDate == null || checkTime == null) return;
+        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("MM dd yyyy HH mm");
+        String dateStr = formatDate.format(newDate);
+        String[] dateInfo = dateStr.split(" ");
+        GraphicClientEndConnector.changeTime(Integer.parseInt(dateInfo[0]), Integer.parseInt(dateInfo[1]),
+                                        Integer.parseInt(dateInfo[2]), Integer.parseInt(dateInfo[3]), Integer.parseInt(dateInfo[4]), Integer.parseInt(duration.getText()));
 
-        Object date = month.getValue();
-        if (date instanceof Date){
-            Date newDate = (Date) date;
-            SimpleDateFormat formatDate = new SimpleDateFormat ("MM dd yyyy hh mm");
-            String dateStr = formatDate.format(newDate);
-            String[] dateInfo = dateStr.split(" ");
-            GraphicClientEndConnector.changeTime(Integer.parseInt(dateInfo[0]), Integer.parseInt(dateInfo[1]),
-                                        Integer.parseInt(dateInfo[2]), Integer.parseInt(dateInfo[3]), Integer.parseInt(dateInfo[4]));
-
-
-
-        }
     }//GEN-LAST:event_monthStateChanged
-
+//        Object date = month.getValue();
+//        if (date instanceof Date){
+//            Date newDate = (Date) date;
+//            SimpleDateFormat formatDate = new SimpleDateFormat ("MM dd yyyy hh mm");
+//            String dateStr = formatDate.format(newDate);
+//            String[] dateInfo = dateStr.split(" ");
+//            GraphicClientEndConnector.changeTime(Integer.parseInt(dateInfo[0]), Integer.parseInt(dateInfo[1]),
+//                                        Integer.parseInt(dateInfo[2]), Integer.parseInt(dateInfo[3]), Integer.parseInt(dateInfo[4]), Integer.parseInt(duration.getText()));
+//
     private void floorPickerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_floorPickerItemStateChanged
     }//GEN-LAST:event_floorPickerItemStateChanged
 
@@ -135,8 +187,16 @@ public class Picker extends javax.swing.JFrame {
      * //@param args the command line arguments
      */
 
+    private void durationActionPerformed(){
+        dateChange();
+    }
+
     public void clear(){
         this.floorPicker.removeAll();
+    }
+
+    public void stop(){
+        dispose();
     }
 
     public void addChoice(Integer floorCount){
@@ -175,9 +235,12 @@ public class Picker extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField duration;
     private javax.swing.JComboBox<Integer> floorPicker;
+    private DateTimePicker datePicker;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JSpinner month;
+    private javax.swing.JLabel newDuration;
     // End of variables declaration//GEN-END:variables
 }
