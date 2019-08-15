@@ -1,8 +1,84 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><dlsu>
 	<building height="300" left="200" name="St. La Salle Hall" top="10" width="100">
+		<floor height="100" number="1" width="100">
+			<room height="30" left="10" name="LS101" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS102" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS103" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS104" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS105" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS106" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS107" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS108" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS109" top="10" width="30">
+			</room>
+		</floor>
+		<floor height="100" number="2" width="100">
+			<room height="30" left="10" name="LS201" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS202" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS203" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS204" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS205" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS206" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS207" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS208" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS209" top="10" width="30">
+			</room>
+		</floor>
 		<floor height="100" number="3" width="100">
+			<room height="30" left="10" name="LS301" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS302" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS303" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS304" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS305" top="10" width="30">
+			</room>
 			<room height="30" left="10" name="LS306" top="10" width="30">
-				</room>
+			</room>
+			<room height="30" left="10" name="LS307" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS308" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS309" top="10" width="30">
+			</room>
+		</floor>
+		<floor height="100" number="3" width="100">
+			<room height="30" left="10" name="LS301" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS302" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS303" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS304" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS305" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS306" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS307" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS308" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="LS309" top="10" width="30">
+			</room>
 		</floor>
 	</building>
 	<building height="200" left="0" name="Velasco Hall" top="400" width="500">
@@ -106,13 +182,27 @@
 	</building>
 	<building height="100" left="200" name="Miguel Hall" top="700" width="400">
 		<floor height="100" number="3" width="100">
-			<room height="30" left="10" name="LS306" top="10" width="30">
+			<room height="30" left="10" name="M307" top="10" width="30">
 			</room>
 		</floor>
 	</building>
 	<building height="50" left="400" name="Mutien Marie Hall" top="900" width="300">
-		<floor height="100" number="3" width="100">
-			<room height="30" left="10" name="LS306" top="10" width="30">
+		<floor height="100" number="1" width="100">
+			<room height="30" left="10" name="MM11" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="MM12" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="MM13" top="10" width="30">
+			</room>
+		</floor>
+		<floor height="100" number="2" width="100">
+			<room height="30" left="10" name="MM21" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="MM22" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="MM23" top="10" width="30">
+			</room>
+			<room height="30" left="10" name="MM24" top="10" width="30">
 			</room>
 		</floor>
 	</building>
@@ -184,5 +274,4 @@
 			</room>
 		</floor>
 	</building>
-
 </dlsu>
