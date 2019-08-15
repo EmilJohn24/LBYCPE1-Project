@@ -1,5 +1,6 @@
 package Server.Transaction;
 
+import Server.ServyLookup.ServyLookup;
 import Server.Structures.Room;
 import org.xml.sax.SAXException;
 
