@@ -5,7 +5,6 @@
 				</room>
 		</floor>
 	</building>
-	
 	<building height="200" left="0" name="Velasco Hall" top="400" width="500">
 		<floor height="100" number="2" width="100">
 			<room height="200" left="0" name="V201" top="300" width="100">
@@ -55,6 +54,30 @@
 			<room height="200" left="0" name="V311" top="300" width="100">
 			</room>
 		</floor>
+		<floor height="100" number="4" width="100">
+			<room height="200" left="0" name="V401" top="300" width="100">
+			</room>
+			<room height="200" left="100" name="V402" top="300" width="100">
+			</room>
+			<room height="200" left="200" name="V403" top="300" width="100">
+			</room>
+			<room height="200" left="300" name="V404" top="300" width="100">
+			</room>
+			<room height="200" left="400" name="V405" top="300" width="100">
+			</room>
+			<room height="200" left="500" name="V406" top="300" width="100">
+			</room>
+			<room height="200" left="600" name="V407" top="300" width="100">
+			</room>
+			<room height="200" left="800" name="V408" top="300" width="100">
+			</room>
+			<room height="200" left="900" name="V409" top="300" width="100">
+			</room>
+			<room height="200" left="1000" name="V410" top="300" width="100">
+			</room>
+			<room height="200" left="0" name="V411" top="300" width="100">
+			</room>
+		</floor>
 		<floor height="100" number="5" width="100">
 			<room height="200" left="0" name="V501" top="300" width="100">
 			</room>
@@ -79,30 +102,7 @@
 			<room height="200" left="0" name="V511" top="300" width="100">
 			</room>
 		</floor>
-		<floor height="100" number="5" width="100">
-			<room height="200" left="0" name="V401" top="300" width="100">
-			</room>
-			<room height="200" left="100" name="V402" top="300" width="100">
-			</room>
-			<room height="200" left="200" name="V403" top="300" width="100">
-			</room>
-			<room height="200" left="300" name="V404" top="300" width="100">
-			</room>
-			<room height="200" left="400" name="V405" top="300" width="100">
-			</room>
-			<room height="200" left="500" name="V406" top="300" width="100">
-			</room>
-			<room height="200" left="600" name="V407" top="300" width="100">
-			</room>
-			<room height="200" left="800" name="V408" top="300" width="100">
-			</room>
-			<room height="200" left="900" name="V409" top="300" width="100">
-			</room>
-			<room height="200" left="1000" name="V410" top="300" width="100">
-			</room>
-			<room height="200" left="0" name="V411" top="300" width="100">
-			</room>
-		</floor>
+
 	</building>
 	<building height="100" left="200" name="Miguel Hall" top="700" width="400">
 		<floor height="100" number="3" width="100">
@@ -117,6 +117,50 @@
 		</floor>
 	</building>
 	<building height="400" left="600" name="St. Joseph Hall" top="450" width="200">
+		<floor height="100" number="1" width="100">
+			<room height="100" left="0" name="SJ101" top="50" width="300">
+			</room>
+			<room height="100" left="300" name="SJ102" top="50" width="300">
+			</room>
+			<room height="100" left="600" name="SJ103" top="50" width="300">
+			</room>
+			<room height="100" left="900" name="SJ104" top="50" width="300">
+			</room>
+			<room height="100" left="1200" name="SJ105" top="50" width="300">
+			</room>
+			<room height="100" left="1500" name="SJ106" top="50" width="300">
+			</room>
+			<room height="100" left="1800" name="SJ107" top="50" width="300">
+			</room>
+			<room height="100" left="2100" name="SJ108" top="50" width="300">
+			</room>
+			<room height="100" left="2400" name="SJ109" top="50" width="300">
+			</room>
+			<room height="100" left="2700" name="SJ110" top="50" width="300">
+			</room>
+		</floor>
+		<floor height="100" number="2" width="100">
+			<room height="100" left="0" name="SJ201" top="50" width="300">
+			</room>
+			<room height="100" left="300" name="SJ202" top="50" width="300">
+			</room>
+			<room height="100" left="600" name="SJ203" top="50" width="300">
+			</room>
+			<room height="100" left="900" name="SJ204" top="50" width="300">
+			</room>
+			<room height="100" left="1200" name="SJ205" top="50" width="300">
+			</room>
+			<room height="100" left="1500" name="SJ206" top="50" width="300">
+			</room>
+			<room height="100" left="1800" name="SJ207" top="50" width="300">
+			</room>
+			<room height="100" left="2100" name="SJ208" top="50" width="300">
+			</room>
+			<room height="100" left="2400" name="SJ209" top="50" width="300">
+			</room>
+			<room height="100" left="2700" name="SJ210" top="50" width="300">
+			</room>
+		</floor>
 		<floor height="100" number="3" width="100">
 			<room height="100" left="0" name="SJ301" top="50" width="300">
 			</room>
@@ -138,32 +182,6 @@
 			</room>
 			<room height="100" left="2700" name="SJ310" top="50" width="300">
 			</room>
-
-
-		</floor>
-		<floor height="100" number="2" width="100">
-			<room height="100" left="0" name="SJ301" top="50" width="300">
-			</room>
-			<room height="100" left="300" name="SJ302" top="50" width="300">
-			</room>
-			<room height="100" left="600" name="SJ303" top="50" width="300">
-			</room>
-			<room height="100" left="900" name="SJ304" top="50" width="300">
-			</room>
-			<room height="100" left="1200" name="SJ305" top="50" width="300">
-			</room>
-			<room height="100" left="1500" name="SJ306" top="50" width="300">
-			</room>
-			<room height="100" left="1800" name="SJ307" top="50" width="300">
-			</room>
-			<room height="100" left="2100" name="SJ308" top="50" width="300">
-			</room>
-			<room height="100" left="2400" name="SJ309" top="50" width="300">
-			</room>
-			<room height="100" left="2700" name="SJ310" top="50" width="300">
-			</room>
-
-
 		</floor>
 	</building>
 
