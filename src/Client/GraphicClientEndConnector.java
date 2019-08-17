@@ -24,6 +24,7 @@ import java.util.Calendar;
 //admittedly, this is due to lack of foresight in the architecture of the GUI-Client Interaction
 public  class GraphicClientEndConnector {
     private static Client topClient;
+    private static String topClientUsername;
     private static Building currentBuilding;
     private static int currentFloor;
     private static Room currentRoom;
@@ -32,6 +33,10 @@ public  class GraphicClientEndConnector {
     private static RoomDisplay roomGUI;
     public static void connectClient(Client c){
         topClient = c;
+    }
+
+    public static void setTopClientUsername(){
+        if (topClient.getSessionID() != 0) topClientUsername = topClient.requestUsername();
     }
     private static int month;
     private static int day;
@@ -91,6 +96,7 @@ public  class GraphicClientEndConnector {
     public static void processReservation(){
         //
         String response = topClient.sendReservationRequest(currentBuilding.getName(), currentFloor, currentRoom.getName(), month, day, year, hour, minute, duration);
+        System.out.println(response);
         switch(response){
             case "RESERVATION_COMPLETE":
                 loadReceipt();
@@ -206,10 +212,11 @@ public  class GraphicClientEndConnector {
         return topClient.requestUsername();
     }
     public static boolean checkIfAvailable(int month, int day, int year, int hour, int minute, int length, String roomName) throws TransformerException, IOException, SAXException {
-        String newReservation = month + " " + day + " " + year + " " + hour + " " + minute + " "  + length + " " + topClient.requestUsername();
+        String newReservation = month + " " + day + " " + year + " " + hour + " " + minute + " "  + length + " " + topClientUsername;
         Node room = topClient.getStructHandler().lookup(currentBuilding.getName(), currentFloor, roomName);
         if (room == null) return false;
         String separator = StructureHandler.getReservationSep();
+        System.out.println(room.getTextContent().trim().split(separator));
         return topClient.getStructHandler().checkValidity(newReservation, room.getTextContent().trim().split(separator), length);
 
     }
