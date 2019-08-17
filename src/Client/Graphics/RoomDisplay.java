@@ -42,10 +42,8 @@ public class RoomDisplay extends GenericGraphicsWindow<Room> {
             if (container instanceof GRect) {
                 Room currentRoom = getStructWithGRect((GRect) container);
                 System.out.println(currentRoom.getName());
-                Hashtable<Calendar, RoomSlot> roomSlots = currentRoom.getSlots();
                 double x = currentRoom.getGraphic().getX();
                 double y = currentRoom.getGraphic().getY() + 20;
-                System.out.println(currentRoom.getGraphic().getSize());
                 currentRoom.getGraphic().setFilled(true);
                 if (!GraphicClientEndConnector.checkIfAvailable(month, day, year, hour, minute, length, currentRoom.getName())) {
                     GLabel notAvail = new GLabel("NOT AVAILABLE", x, y);
