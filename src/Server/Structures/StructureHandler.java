@@ -107,7 +107,7 @@ public class StructureHandler {
         return reservationSep;
     }
 
-    public Element lookup(String building, Integer floor, String room) throws TransformerException, IOException, SAXException{
+    public Element lookup(String building, Integer floor, String room){
         NodeList buildingNodes = structureDoc.getElementsByTagName(buildingsIndicator);
         for (int bCount = 0; bCount < buildingNodes.getLength(); bCount++){
 
@@ -124,8 +124,6 @@ public class StructureHandler {
                             Element currentRoom = (Element) roomNodes.item(rCount);
                             if (room.equals(currentRoom.getAttribute("name"))){
                                 return currentRoom;
-
-
                             }
                         }
                         break;
@@ -198,7 +196,9 @@ public class StructureHandler {
             backStart = backComparison.getTimeInMillis();
             backDifference = backEnd - backStart;
             backSecondDifference = backDifference / 60000;
-            System.out.println(frontSecondDifference + "." + backSecondDifference);
+            System.out.println(c.getSecond());
+            System.out.println("Max: " + duration + "|||" + backSecondDifference);
+            System.out.println("Min:" +  maxLength + "|||" + frontSecondDifference);
 
             if ((frontSecondDifference < maxLength && frontDifference >= 0) || (backSecondDifference <= 0) && -backSecondDifference <= duration) return false;
         }
@@ -211,7 +211,7 @@ public class StructureHandler {
 
 
     public void appendToReservation(Element e, String text) throws TransformerException, IOException, SAXException {
-        e.setTextContent(e.getTextContent() + reservationSep + text);
+        e.setTextContent(e.getTextContent() + text + reservationSep);
         updateFile();
     }
 
@@ -220,6 +220,7 @@ public class StructureHandler {
         Element matchingRoom = lookup(building, floor, room);
         String[] otherReservations = matchingRoom.getTextContent().trim().split(reservationSep);
         if (checkValidity(newReservation, otherReservations, length)){
+            for (String r : otherReservations) System.out.println(r);
             this.appendToReservation(matchingRoom, newReservation);
             return "RESERVATION_COMPLETE";
         }
