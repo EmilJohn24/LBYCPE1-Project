@@ -9,8 +9,12 @@ package Client.Picker;
 import Client.GraphicClientEndConnector;
 import Client.RoomReservationClient;
 import com.github.lgooddatepicker.components.DateTimePicker;
+import com.github.lgooddatepicker.components.TimePicker;
+import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.optionalusertools.DateTimeChangeListener;
+import com.github.lgooddatepicker.optionalusertools.TimeChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateTimeChangeEvent;
+import com.github.lgooddatepicker.zinternaltools.TimeChangeEvent;
 import org.jdesktop.swingx.JXDatePicker;
 import org.xml.sax.SAXException;
 
@@ -58,7 +62,7 @@ public class Picker extends javax.swing.JFrame {
         month = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
         newDuration = new javax.swing.JLabel();
-        duration = new javax.swing.JTextField();
+        duration = new TimePicker();
         datePicker = new DateTimePicker();
         datePicker.setForeground(Color.WHITE);
         floorPicker.addItemListener(new java.awt.event.ItemListener() {
@@ -82,16 +86,14 @@ public class Picker extends javax.swing.JFrame {
         datePicker.setDateTimePermissive(LocalDateTime.now());
         jLabel1.setText("Floor");
         newDuration.setText("Duration of Reservation");
-        duration.setText("30");
+        duration.setTimeToNow();
         month.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, new java.util.Date(), java.util.Calendar.MINUTE));
-        duration.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                dateChange();
-            }
-
-
-        });
+        duration.addTimeChangeListener(new TimeChangeListener() {
+               @Override
+               public void timeChanged(TimeChangeEvent dateTimeChangeEvent) {
+                   dateChange();
+               }
+           });
 
         jLabel2.setText("Date and Time");
 
@@ -169,12 +171,14 @@ public class Picker extends javax.swing.JFrame {
         LocalDateTime newDate = datePicker.getDateTimePermissive();
         LocalDate checkDate = datePicker.getDatePicker().getDate();
         LocalTime checkTime = datePicker.getTimePicker().getTime();
+        LocalTime endTime = duration.getTime();
         if (newDate == null || checkDate == null || checkTime == null) return;
         DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("MM dd yyyy HH mm");
         String dateStr = formatDate.format(newDate);
         String[] dateInfo = dateStr.split(" ");
+        int actualDuration = (endTime.toSecondOfDay() - checkTime.toSecondOfDay()) / 60; //in minutes
         GraphicClientEndConnector.changeTime(Integer.parseInt(dateInfo[0]), Integer.parseInt(dateInfo[1]),
-                                        Integer.parseInt(dateInfo[2]), Integer.parseInt(dateInfo[3]), Integer.parseInt(dateInfo[4]), Integer.parseInt(duration.getText()));
+                                        Integer.parseInt(dateInfo[2]), Integer.parseInt(dateInfo[3]), Integer.parseInt(dateInfo[4]),actualDuration);
 
     }//GEN-LAST:event_monthStateChanged
 //        Object date = month.getValue();
@@ -243,7 +247,7 @@ public class Picker extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField duration;
+    private TimePicker duration;
     private DateTimePicker endDatePicker;
     private javax.swing.JComboBox<Integer> floorPicker;
     private DateTimePicker datePicker;
