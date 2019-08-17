@@ -24,7 +24,7 @@ public class UserDatabase {
 
     public boolean inDatabase(String username,
                               String password){
-        return users.get(username).equals(password);
+            return presentInDataBase(username) && users.get(username).equals(password);
     }
 
     public boolean presentInDataBase(String username){

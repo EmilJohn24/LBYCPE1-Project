@@ -1,5 +1,6 @@
 package Server.Transaction;
 
+import Server.ServyLookup.ServyLookup;
 import Server.Structures.Room;
 import org.xml.sax.SAXException;
 
@@ -33,6 +34,12 @@ public class SessionManager {
         return hash;
     }
 
+
+    public static String getUsername(Integer sessionID){
+        Account tmp = sessions.get(sessionID);
+        return tmp.getUsername();
+    }
+
     public static File getStructureFile(){
         return Manager.getStructureFile();
     }
@@ -45,10 +52,10 @@ public class SessionManager {
         Account newLogin = SessionManager.login(user, password);
         return addToSessions(newLogin);
     }
-
-    public static String reserve(String sessionID, String building, String floor, String room, int month, int day, int year, int hour, int minute) throws TransformerException, IOException, SAXException {
+//String building, Integer floor, String room, int month, int day, int year, int hour, int minute, int length, Account user
+    public static String reserve(String sessionID, String building, String floor, String room, int month, int day, int year, int hour, int minute, int duration) throws TransformerException, IOException, SAXException {
         Account acc = getSessionAccount(Integer.parseInt(sessionID));
-        return Manager.reserve(acc, building, Integer.parseInt(floor), room, month, day, year, hour, minute);
+        return Manager.reserve(acc, building, Integer.parseInt(floor), room, month, day, year, hour, minute, duration);
     }
 
 

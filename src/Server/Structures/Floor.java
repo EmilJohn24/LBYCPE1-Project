@@ -24,6 +24,8 @@ public class Floor {
         floor.add(newRoom.getGraphic());
     }
 
+    public ArrayList<Room> getRooms(){return this.rooms;}
+
     public void createRoom(String name, String description, int capacity,
                            double top, double left, double width, double height){
         addRoom(new Room(name, description, capacity,
@@ -53,4 +55,9 @@ public class Floor {
     public ArrayList<Room> getReferenceToRooms(){
         return rooms;
     }
+
+    public int getFloorCount() {
+        return floorCount;
+    }
+
 }

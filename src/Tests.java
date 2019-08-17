@@ -1,4 +1,5 @@
 import Client.Client;
+import Client.Graphics.BuildingDisplay;
 import Server.Structures.*;
 import Server.Transaction.Account;
 import Server.Transaction.UserDatabase;
@@ -13,10 +14,14 @@ import java.util.ArrayList;
 
 public class Tests {
 
-    Client dummyClient;
+    private Client dummyClient;
 
     public Tests(){
-        dummyClient = new Client("127.0.0.1", 4400);
+/*        try {
+            dummyClient = new Client("127.0.0.1", 4400);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
     }
     @Test
     public void xmlParseTest(){
@@ -25,9 +30,12 @@ public class Tests {
         Account testAccount = Account.pseudoLogin("emil_lopez@dlsu.edu.ph", testDatabase);
         try {
             StructureHandler testParse = new StructureHandler("test.xml", testDatabase);
-            System.out.println(testParse.addReservation("St. La Salle Hall", 1, "LS206", 2, 30, 1999, 10, 30,testAccount));
+            testParse.lookup("St. La Salle Hall", 3, "LS306");
+            System.out.println(testParse.addReservationTo("St. La Salle Hall", 3, "LS306", 1, 1, 1999, 1, 12, 20, testAccount));
             ArrayList<Building> result = testParse.parse();
-
+//            BuildingDisplay buildingDisplay = new BuildingDisplay();
+//            buildingDisplay.loadUpGraphics(result);
+//            buildingDisplay.start();
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -52,27 +60,29 @@ public class Tests {
         String sessionResponse = dummyClient.getResponse();
         System.out.println(sessionResponse);
         String sessionID = sessionResponse.split(":")[1];
-        try {
-            dummyClient.sendRequest("RESERVE:" + sessionID + ",Velasco Hall,3,V307,2,29,1999,11,30");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        dummyClient.sendRequest("RESERVE:" + sessionID + ",Velasco Hall,3,V307,2,29,1999,11,30");
         System.out.println(dummyClient.getResponse());
         //RESERVE:[SESSIONID],[BUILDING NAME],[FLOOR],[ROOM],[MONTH],[DAY],[YEAR],[HOUR],[MINUTE]
     }
      
 
     @Test
-    public void roomRequestTest(){
+    public void roomRequestTest() throws SAXException, ParserConfigurationException, TransformerConfigurationException, IOException {
+        dummyClient.loadRoomData();
+    }
+
+    @Test
+    public void loadBuildingTest(){
         try {
-            dummyClient.sendRequest("GET_ROOM_DATA");
-        } catch (Exception e) {
+            dummyClient.loadBuildingGUI();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        String response = dummyClient.getResponse();
-        if (response.equals("SENDING_ROOM_DATA")){
-            System.out.println(dummyClient.getResponse());
-        }
-
     }
 }
