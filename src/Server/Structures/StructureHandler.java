@@ -43,10 +43,10 @@ public class StructureHandler {
     private DOMSource src;
 
 
-    private final String inspector = "dlsu";
-    private final String buildingsIndicator = "building";
-    private final String floorIndicator = "floor";
-    private final String roomIndicator = "room";
+    public final static String inspector = "dlsu";
+    public final static String buildingsIndicator = "building";
+    public final static String floorIndicator = "floor";
+    public final static String roomIndicator = "room";
 //    private final String descriptionIndicator = "description";
 //    private final String dateIndicator = "date";
 //    private final String slotIndicator = "slot";
@@ -106,6 +106,27 @@ public class StructureHandler {
     public static String getReservationSep(){
         return reservationSep;
     }
+    public Element lookup(String building, Integer floor){
+        NodeList buildingNodes = structureDoc.getElementsByTagName(buildingsIndicator);
+        for (int bCount = 0; bCount < buildingNodes.getLength(); bCount++){
+
+            Element currentBuilding = (Element) buildingNodes.item(bCount);
+            if (building.equals(currentBuilding.getAttribute("name"))){
+                NodeList floorNodes = currentBuilding.getElementsByTagName(floorIndicator);
+                for (int fCount = 0; fCount < floorNodes.getLength(); fCount++){
+
+                    Element currentFloor = (Element) floorNodes.item(fCount);
+                    if (floor == getElementAsInt(currentFloor, "number")){
+                        return currentFloor;
+                    }
+
+                }
+                break;
+            }
+        }
+        return null;
+    }
+
 
     public Element lookup(String building, Integer floor, String room){
         NodeList buildingNodes = structureDoc.getElementsByTagName(buildingsIndicator);
@@ -117,6 +138,7 @@ public class StructureHandler {
                 for (int fCount = 0; fCount < floorNodes.getLength(); fCount++){
 
                     Element currentFloor = (Element) floorNodes.item(fCount);
+                    //consider using the other lookup function for the tasks above
                     if (floor == getElementAsInt(currentFloor, "number")){
                         NodeList roomNodes = currentFloor.getElementsByTagName(roomIndicator);
 
