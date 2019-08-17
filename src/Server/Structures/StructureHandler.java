@@ -183,7 +183,6 @@ public class StructureHandler {
         for (Pair<String, Calendar>  c : comparisonCalendars){
             Calendar comparison = c.getSecond();
             Calendar backComparison = (Calendar) comparison.clone();
-            //Sins were committed here. Do not touch or suffer the consequences -Lopez
             Integer duration = getDurationOfReservation(otherReservations[indexTracker]);
             indexTracker++;
             if (comparison == null || backComparison == null || duration == null) continue;
@@ -201,7 +200,7 @@ public class StructureHandler {
             backSecondDifference = backDifference / 60000;
             System.out.println(frontSecondDifference + "." + backSecondDifference);
 
-            if ((frontSecondDifference < maxLength && frontDifference > 0) || (backSecondDifference < 0) && -backSecondDifference < duration) return false;
+            if ((frontSecondDifference < maxLength && frontDifference >= 0) || (backSecondDifference <= 0) && -backSecondDifference <= duration) return false;
         }
 
         return true;

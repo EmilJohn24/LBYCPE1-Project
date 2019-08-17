@@ -62,11 +62,11 @@ public class Client {
         }
 
         else if (id.equals("ERROR_SENDING_FILE")){
-            log("Well fuck");
+            log("Error sending file");
             System.exit(0);
         }
         else if (id == null){
-            log("Null string bois");
+            log("No ID found");
         }
 
 

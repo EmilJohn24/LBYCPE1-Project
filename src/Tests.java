@@ -31,11 +31,11 @@ public class Tests {
         try {
             StructureHandler testParse = new StructureHandler("test.xml", testDatabase);
             testParse.lookup("St. La Salle Hall", 3, "LS306");
-            System.out.println(testParse.addReservationTo("St. La Salle Hall", 3, "LS306", 1, 1, 1999, 1, 34, 20, testAccount));
+            System.out.println(testParse.addReservationTo("St. La Salle Hall", 3, "LS306", 1, 1, 1999, 1, 12, 20, testAccount));
             ArrayList<Building> result = testParse.parse();
-            BuildingDisplay buildingDisplay = new BuildingDisplay();
-            buildingDisplay.loadUpGraphics(result);
-            buildingDisplay.start();
+//            BuildingDisplay buildingDisplay = new BuildingDisplay();
+//            buildingDisplay.loadUpGraphics(result);
+//            buildingDisplay.start();
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (IOException e) {

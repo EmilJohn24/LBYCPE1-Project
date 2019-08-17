@@ -90,10 +90,10 @@ public  class GraphicClientEndConnector {
 
     public static void processReservation(){
         //
-        loadReceipt();
         String response = topClient.sendReservationRequest(currentBuilding.getName(), currentFloor, currentRoom.getName(), month, day, year, hour, minute, duration);
         switch(response){
             case "RESERVATION_COMPLETE":
+                loadReceipt();
                 JOptionPane.showMessageDialog(null, "Reservation successful");
                 picker.stop();
                 //RoomReservationClient.main(null);
@@ -158,9 +158,9 @@ public  class GraphicClientEndConnector {
     public static void loadReceipt(){
 
         String datetime = month + "/" + day + "/" + year + " " + hour + ":" + minute;
+        int fakeID = Math.abs(topClient.getSessionID());
         java.awt.EventQueue.invokeLater(() -> {
-            System.out.println("Fuck");
-            receipt.displayinformation(getUsername(), currentRoom.getName(), datetime, "", String.valueOf(topClient.getSessionID()));
+            receipt.displayinformation(getUsername(), currentRoom.getName(), datetime, "", String.valueOf(fakeID));
             receipt.setVisible(true);
         });
 

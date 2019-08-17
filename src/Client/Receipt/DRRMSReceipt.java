@@ -73,7 +73,8 @@ public class DRRMSReceipt extends javax.swing.JFrame {
         TF5 = new javax.swing.JTextField();
         TF4 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-
+        TF4.setVisible(false);
+        jLabel6.setVisible(false);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N

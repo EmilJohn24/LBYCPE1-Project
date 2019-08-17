@@ -1,83 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><dlsu>
 	<building height="300" left="200" name="St. La Salle Hall" top="10" width="100">
 		<floor height="100" number="1" width="100">
-			<room height="30" left="10" name="LS101" top="10" width="30">
+			<room height="150" left="0" name="LS101" top="300" width="75">
+			~~~~8 15 2019 13 0 180 emil_lopez@dlsu.edu.ph</room>
+			<room height="150" left="75" name="LS102" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS102" top="10" width="30">
+			<room height="150" left="150" name="LS103" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS103" top="10" width="30">
+			<room height="150" left="225" name="LS104" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS104" top="10" width="30">
+			<room height="150" left="300" name="LS105" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS105" top="10" width="30">
+			<room height="150" left="375" name="LS106" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS106" top="10" width="30">
+			<room height="150" left="450" name="LS107" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS107" top="10" width="30">
-			</room>
-			<room height="30" left="10" name="LS108" top="10" width="30">
-			</room>
-			<room height="30" left="10" name="LS109" top="10" width="30">
-			</room>
+			<room height="150" left="525" name="LS108" top="300" width="75">
+			~~~~8 15 2019 11 30 90 emil_lopez@dlsu.edu.ph~~~~8 15 2019 0 0 90 emil_lopez@dlsu.edu.ph</room>
+			<room height="150" left="600" name="LS109" top="300" width="75">
+			~~~~8 15 2019 13 0 300 emil_lopez@dlsu.edu.ph</room>
 		</floor>
 		<floor height="100" number="2" width="100">
-			<room height="30" left="10" name="LS201" top="10" width="30">
+			<room height="150" left="0" name="LS201" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS202" top="10" width="30">
+			<room height="150" left="75" name="LS202" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS203" top="10" width="30">
+			<room height="150" left="150" name="LS203" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS204" top="10" width="30">
+			<room height="150" left="225" name="LS204" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS205" top="10" width="30">
+			<room height="150" left="300" name="LS205" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS206" top="10" width="30">
+			<room height="150" left="375" name="LS206" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS207" top="10" width="30">
+			<room height="150" left="450" name="LS207" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS208" top="10" width="30">
+			<room height="150" left="525" name="LS208" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS209" top="10" width="30">
-			</room>
+			<room height="150" left="600" name="LS209" top="300" width="75">
+			~~~~8 15 2019 13 0 240 emil_lopez@dlsu.edu.ph</room>
 		</floor>
 		<floor height="100" number="3" width="100">
-			<room height="30" left="10" name="LS301" top="10" width="30">
+			<room height="150" left="0" name="LS301" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS302" top="10" width="30">
+			<room height="150" left="75" name="LS302" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS303" top="10" width="30">
+			<room height="150" left="150" name="LS303" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS304" top="10" width="30">
+			<room height="150" left="225" name="LS304" top="300" width="75">
+				~~~~8 21 2019 12 30 30 josef_solis@dlsu.edu.ph</room>
+			<room height="150" left="300" name="LS305" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS305" top="10" width="30">
+			<room height="150" left="375" name="LS306" top="300" width="75">
+			~~~~1 1 1999 1 34 20 emil_lopez@dlsu.edu.ph~~~~1 1 1999 1 34 20 emil_lopez@dlsu.edu.ph~~~~~~~~1 1 1999 1 12 20 emil_lopez@dlsu.edu.ph</room>
+			<room height="150" left="450" name="LS307" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS306" top="10" width="30">
+			<room height="150" left="525" name="LS308" top="300" width="75">
 			</room>
-			<room height="30" left="10" name="LS307" top="10" width="30">
-			</room>
-			<room height="30" left="10" name="LS308" top="10" width="30">
-			</room>
-			<room height="30" left="10" name="LS309" top="10" width="30">
-			</room>
-		</floor>
-		<floor height="100" number="3" width="100">
-			<room height="30" left="10" name="LS301" top="10" width="30">
-			</room>
-			<room height="30" left="10" name="LS302" top="10" width="30">
-			</room>
-			<room height="30" left="10" name="LS303" top="10" width="30">
-			</room>
-			<room height="30" left="10" name="LS304" top="10" width="30">
-			</room>
-			<room height="30" left="10" name="LS305" top="10" width="30">
-			</room>
-			<room height="30" left="10" name="LS306" top="10" width="30">
-			</room>
-			<room height="30" left="10" name="LS307" top="10" width="30">
-			</room>
-			<room height="30" left="10" name="LS308" top="10" width="30">
-			</room>
-			<room height="30" left="10" name="LS309" top="10" width="30">
+			<room height="150" left="600" name="LS309" top="300" width="75">
 			</room>
 		</floor>
 	</building>
@@ -88,11 +68,11 @@
 			<room height="200" left="100" name="V202" top="300" width="100">
 			</room>
 			<room height="200" left="200" name="V203" top="300" width="100">
-			</room>
+			~~~~8 15 2019 0 30 30 emil_lopez@dlsu.edu.ph</room>
 			<room height="200" left="300" name="V204" top="300" width="100">
 			</room>
 			<room height="200" left="400" name="V205" top="300" width="100">
-			</room>
+				~~~~8 15 2019 8 0 30 josef_solis@dlsu.edu.ph~~~~8 15 2019 8 0 540 ana.illahi@dlsu.edu.ph~~~~8 15 2019 9 30 40 emil_lopez@dlsu.edu.ph~~~~8 15 2019 6 30 70 emil_lopez@dlsu.edu.ph</room>
 			<room height="200" left="500" name="V206" top="300" width="100">
 			</room>
 			<room height="200" left="600" name="V207" top="300" width="100">
@@ -120,7 +100,7 @@
 			<room height="200" left="500" name="V306" top="300" width="100">
 			</room>
 			<room height="200" left="600" name="V307" top="300" width="100">
-			</room>
+				~~~~8 21 2019 9 58 30 emil_lopez@dlsu.edu.ph~~~~8 22 2019 1 30 80 emil_lopez@dlsu.edu.ph~~~~8 21 2019 10 3 30 josef_solis@dlsu.edu.ph</room>
 			<room height="200" left="800" name="V308" top="300" width="100">
 			</room>
 			<room height="200" left="900" name="V309" top="300" width="100">
@@ -136,13 +116,13 @@
 			<room height="200" left="100" name="V402" top="300" width="100">
 			</room>
 			<room height="200" left="200" name="V403" top="300" width="100">
-			</room>
+				~~~~8 25 2019 1 0 30 josef_solis@dlsu.edu.ph</room>
 			<room height="200" left="300" name="V404" top="300" width="100">
 			</room>
 			<room height="200" left="400" name="V405" top="300" width="100">
 			</room>
 			<room height="200" left="500" name="V406" top="300" width="100">
-			</room>
+				~~~~8 22 2019 0 30 50 emil_lopez@dlsu.edu.ph</room>
 			<room height="200" left="600" name="V407" top="300" width="100">
 			</room>
 			<room height="200" left="800" name="V408" top="300" width="100">
@@ -152,7 +132,7 @@
 			<room height="200" left="1000" name="V410" top="300" width="100">
 			</room>
 			<room height="200" left="0" name="V411" top="300" width="100">
-			</room>
+				~~~~8 23 2019 1 30 30 jet_chua@dlsu.edu.ph</room>
 		</floor>
 		<floor height="100" number="5" width="100">
 			<room height="200" left="0" name="V501" top="300" width="100">
@@ -178,11 +158,10 @@
 			<room height="200" left="0" name="V511" top="300" width="100">
 			</room>
 		</floor>
-
 	</building>
 	<building height="100" left="200" name="Miguel Hall" top="700" width="400">
 		<floor height="100" number="3" width="100">
-			<room height="30" left="10" name="M307" top="10" width="30">
+			<room height="100" left="10" name="M307" top="10" width="150">
 			</room>
 		</floor>
 	</building>

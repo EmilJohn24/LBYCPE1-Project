@@ -13,7 +13,6 @@ import Server.Structures.StructureHandler;
 import Server.Transaction.UserDatabase;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
-
 import javax.swing.table.DefaultTableModel;
 import javax.xml.transform.TransformerException;
 import java.awt.event.ActionEvent;
@@ -58,12 +57,17 @@ public class ServyLookup extends javax.swing.JFrame {
         int buildingCount = buildingCB.getSelectedIndex();
         int floorCount = floorCB.getSelectedIndex();
         int roomCount = roomCB.getSelectedIndex();
-        build();
+        //build();
         buildingCB.setSelectedIndex(buildingCount);
+        tempNonEditingFlag = true;
         buildingCBActionPerformed(null);
+        tempNonEditingFlag = true;
         floorCB.setSelectedIndex(floorCount);
+        tempNonEditingFlag = true;
         floorCBActionPerformed(null);
+        tempNonEditingFlag = true;
         roomCB.setSelectedIndex(roomCount);
+        tempNonEditingFlag = true;
         roomCBActionPerformed(null);
 
 
@@ -181,12 +185,13 @@ public class ServyLookup extends javax.swing.JFrame {
 
     private boolean tempNonEditingFlag = true;
     private void roomCBActionPerformed(ActionEvent evt) {
+        clearTable();
         if (tempNonEditingFlag) {
             tempNonEditingFlag = false;
             return;
         }
         int index = roomCB.getSelectedIndex();
-        if (rooms.size() <= index || index <= -1 || floorCB.getSelectedIndex() < -1) return;
+        //if (rooms.size() <= index || index <= -1 || floorCB.getSelectedIndex() < -1) return;
         currentRoom = rooms.get(index);
 
         try {
@@ -290,6 +295,10 @@ public class ServyLookup extends javax.swing.JFrame {
         String stringifiedRoomInfo = roomInfo.getTextContent().trim();
         return stringifiedRoomInfo.split(StructureHandler.getReservationSep());
     }
+
+    public static String padLeft(String s, int n) {
+        return String.format("%" + n + "s", s);
+    }
     
     public void addBuildingName(String name){
         buildingCB.addItem(name);
@@ -304,8 +313,10 @@ public class ServyLookup extends javax.swing.JFrame {
     }
     
     public void addRowToTable(int month, int day, int year, int hour, int minute, String email, int duration){
+
+        String newMinute = padLeft(String.valueOf(minute), 2).replace(' ', '0');
         String date = month + "/" + day + "/" + year; //consider using a defined library for this in the future
-        String time = hour + ":" + minute;
+        String time = hour + ":" + newMinute;
         String durationStr = String.valueOf(duration);
         tableModel.addRow(new Object[]{date, time, email, durationStr});
     }

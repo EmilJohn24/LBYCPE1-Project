@@ -20,6 +20,7 @@ import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -59,7 +60,6 @@ public class Picker extends javax.swing.JFrame {
         newDuration = new javax.swing.JLabel();
         duration = new javax.swing.JTextField();
         datePicker = new DateTimePicker();
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         datePicker.setForeground(Color.WHITE);
         floorPicker.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -84,7 +84,14 @@ public class Picker extends javax.swing.JFrame {
         newDuration.setText("Duration of Reservation");
         duration.setText("30");
         month.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, new java.util.Date(), java.util.Calendar.MINUTE));
+        duration.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                dateChange();
+            }
 
+
+        });
 
         jLabel2.setText("Date and Time");
 
@@ -97,7 +104,6 @@ public class Picker extends javax.swing.JFrame {
     );
 
 
-        duration.setText("30");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -187,7 +193,9 @@ public class Picker extends javax.swing.JFrame {
      * //@param args the command line arguments
      */
 
-    private void durationActionPerformed(){
+    private void durationActionPerformed(ActionEvent evt){
+
+        System.out.println("A");
         dateChange();
     }
 
@@ -236,6 +244,7 @@ public class Picker extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField duration;
+    private DateTimePicker endDatePicker;
     private javax.swing.JComboBox<Integer> floorPicker;
     private DateTimePicker datePicker;
     private javax.swing.JLabel jLabel1;
