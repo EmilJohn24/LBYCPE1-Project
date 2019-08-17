@@ -120,6 +120,7 @@ public class Login extends javax.swing.JFrame {
             int sessionID = Integer.parseInt(responseComponents[1]);
             clientHolder.setSessionID(sessionID);
             setSessionID(sessionID);
+            GraphicClientEndConnector.setTopClientUsername();
             GraphicClientEndConnector.runClient();
         }
         else if (id.equals("INVALID_CREDENTIALS")){
