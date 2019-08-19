@@ -177,7 +177,7 @@ public class ServyLookup extends javax.swing.JFrame {
             for (String data : roomData){
                 if (data != null || data.trim().length() != 0) {
                     String[] dataArray = data.split(" ");
-                    if (dataArray.length != 7) continue;
+                    if (dataArray.length < 7) continue;
                     addRowToTable(Integer.parseInt(dataArray[0]), Integer.parseInt(dataArray[1]),
                             Integer.parseInt(dataArray[2]), Integer.parseInt(dataArray[3]), Integer.parseInt(dataArray[4]), dataArray[6], Integer.parseInt(dataArray[5]));
                 }
