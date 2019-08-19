@@ -159,6 +159,7 @@ public class StructureHandler {
     }
                 //[month] [day] [year] [hour] [minute] [duration] [email] [reason]::::
                 //   0      1      2      3       4          5       6        7
+                //[reason]: separated by + signs
 
     public Pair<String, Calendar> createComparatorDate(String formatText){
         if (formatText.isBlank()) return null; //Bad error handling but whatever man -Lopez
@@ -237,8 +238,8 @@ public class StructureHandler {
         updateFile();
     }
 
-    public String addReservationTo(String building, Integer floor, String room, int month, int day, int year, int hour, int minute, int length, Account user) throws TransformerException, IOException, SAXException {
-        String newReservation = month + " " + day + " " + year + " " + hour + " " + minute + " "  + length + " " + user.getUsername();
+    public String addReservationTo(String building, Integer floor, String room, int month, int day, int year, int hour, int minute, int length, Account user, String reason) throws TransformerException, IOException, SAXException {
+        String newReservation = month + " " + day + " " + year + " " + hour + " " + minute + " "  + length + " " + user.getUsername() + " " + reason;
         Element matchingRoom = lookup(building, floor, room);
         String[] otherReservations = matchingRoom.getTextContent().trim().split(reservationSep);
         if (checkValidity(newReservation, otherReservations, length)){

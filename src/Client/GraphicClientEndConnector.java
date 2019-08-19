@@ -3,6 +3,7 @@ package Client;
 import Client.Graphics.BuildingDisplay;
 import Client.Graphics.RoomDisplay;
 import Client.Picker.Picker;
+import Client.Reason.Reason;
 import Client.Receipt.DRRMSReceipt;
 import Server.Structures.Building;
 import Server.Structures.Floor;
@@ -16,7 +17,11 @@ import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
+import java.awt.*;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -90,18 +95,37 @@ public  class GraphicClientEndConnector {
         }
 
     }
+    private static String reason;
+    private static Reason reasonForm;
+    public static void waitForReason(){
+        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                reasonForm.setVisible(true);
+//            }
+//        });
+            EventQueue.invokeLater(()-> {
+                        reasonForm = new Reason();
+                        reasonForm.setVisible(true);
 
+                    });
+
+        //reasonForm.dispose();
+        }
 
 
     public static void processReservation(){
         //
-        String response = topClient.sendReservationRequest(currentBuilding.getName(), currentFloor, currentRoom.getName(), month, day, year, hour, minute, duration);
+        reason = reasonForm.getReason();
+        reasonForm.stop();
+        reason = reason.replace(" ", "+");
+        picker.stop();
+        String response = topClient.sendReservationRequest(currentBuilding.getName(), currentFloor, currentRoom.getName(), month, day, year, hour, minute, duration, reason);
         System.out.println(response);
         switch(response){
             case "RESERVATION_COMPLETE":
                 loadReceipt();
                 JOptionPane.showMessageDialog(null, "Reservation successful");
-                picker.stop();
                 //RoomReservationClient.main(null);
                 //System.exit(0);
                 while(true);
@@ -140,7 +164,7 @@ public  class GraphicClientEndConnector {
                 if (currentBuilding != null){
                     putFloorsInPicker();
                 }
-            };
+            }
         });
 
 
@@ -162,11 +186,12 @@ public  class GraphicClientEndConnector {
     }
 
     public static void loadReceipt(){
-
-        String datetime = month + "/" + day + "/" + year + " " + hour + ":" + minute;
+        LocalDateTime dateAndTime = LocalDateTime.of(year, month, day, hour, minute);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:ss");
+        String datetime = dateAndTime.format(formatter);
         int fakeID = Math.abs(topClient.getSessionID());
         java.awt.EventQueue.invokeLater(() -> {
-            receipt.displayinformation(getUsername(), currentRoom.getName(), datetime, "", String.valueOf(fakeID));
+            receipt.displayinformation(getUsername(), currentRoom.getName(), datetime, reason.replace("+", " "), String.valueOf(fakeID));
             receipt.setVisible(true);
         });
 
@@ -185,6 +210,7 @@ public  class GraphicClientEndConnector {
         buildingGUI = new BuildingDisplay();
         picker = new Picker();
         receipt = new DRRMSReceipt();
+
     }
 
     public static Building getCurrentBuilding() {

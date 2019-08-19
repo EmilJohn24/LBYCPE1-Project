@@ -83,9 +83,9 @@ public class Client {
         return null;
     }
     public String sendReservationRequest(String building, int floor, String room,
-                                int month, int day, int year, int hour, int minute, int duration){
+                                int month, int day, int year, int hour, int minute, int duration, String reason){
         sendRequest("RESERVE:" + sessionID + "," + building + "," + floor + "," + room + "," + month + "," + day + "," + year + ","
-                    + hour + "," + minute + "," + duration);
+                    + hour + "," + minute + "," + duration + ","  + reason);
         return getResponse();
 
     }

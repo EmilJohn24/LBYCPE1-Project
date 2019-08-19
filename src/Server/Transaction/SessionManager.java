@@ -53,9 +53,10 @@ public class SessionManager {
         return addToSessions(newLogin);
     }
 //String building, Integer floor, String room, int month, int day, int year, int hour, int minute, int length, Account user
-    public static String reserve(String sessionID, String building, String floor, String room, int month, int day, int year, int hour, int minute, int duration) throws TransformerException, IOException, SAXException {
+    public static String reserve(String sessionID, String building, String floor, String room, int month, int day, int year,
+                                 int hour, int minute, int duration, String reason) throws TransformerException, IOException, SAXException {
         Account acc = getSessionAccount(Integer.parseInt(sessionID));
-        return Manager.reserve(acc, building, Integer.parseInt(floor), room, month, day, year, hour, minute, duration);
+        return Manager.reserve(acc, building, Integer.parseInt(floor), room, month, day, year, hour, minute, duration, reason);
     }
 
 

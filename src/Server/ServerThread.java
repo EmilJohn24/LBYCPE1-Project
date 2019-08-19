@@ -34,7 +34,7 @@ public class ServerThread extends Thread{
     //Normal Types:
     //LOGIN:[username],[password]
     //GET_ROOM_DATA
-    //RESERVE:[SESSIONID],[BUILDING NAME],[FLOOR],[ROOM],[MONTH],[DAY],[YEAR],[HOUR],[MINUTE],[DURATION]
+    //RESERVE:[SESSIONID],[BUILDING NAME],[FLOOR],[ROOM],[MONTH],[DAY],[YEAR],[HOUR],[MINUTE],[DURATION],[REASON]
 
 
     //Returnable Messages:
@@ -61,7 +61,7 @@ public class ServerThread extends Thread{
             case "GET_ROOM_DATA":
                 return roomRequestHandler(); //send xml via manager request. Return ID indicating the transfer is complete
             case "RESERVE":
-                return reservationHandler(params[0], params[1], params[2], params[3], params[4], params[5], params[6], params[7], params[8], params[9]); //
+                return reservationHandler(params[0], params[1], params[2], params[3], params[4], params[5], params[6], params[7], params[8], params[9], params[10]); //
             case "REQUEST_USER_NAME":
                 return usernameRequestHandler(params[0]);
             case "DISCONNECT":
@@ -105,10 +105,10 @@ public class ServerThread extends Thread{
         }
     }
 
-        private String reservationHandler(String sessionID, String building, String floor, String room, String month, String day, String year, String hour, String minute, String duration){
+        private String reservationHandler(String sessionID, String building, String floor, String room, String month, String day, String year, String hour, String minute, String duration, String reason){
         try {
             return SessionManager.reserve(sessionID, building, floor, room, Integer.parseInt(month), Integer.parseInt(day), Integer.parseInt(year), Integer.parseInt(hour), Integer.parseInt(minute),
-                    Integer.parseInt(duration));
+                    Integer.parseInt(duration), reason);
         } catch (TransformerException e) {
             e.printStackTrace();
         } catch (SAXException e) {

@@ -20,7 +20,7 @@ public class RoomDisplay extends GenericGraphicsWindow<Room> {
 
     public void highLevelClickHandler(Room clickedRoom) {
         GraphicClientEndConnector.setCurrentRoom(clickedRoom);
-        GraphicClientEndConnector.processReservation();
+        GraphicClientEndConnector.waitForReason();
     }
 
     public void colorizer(int month, int day, int year, int hour, int minute, int length) throws TransformerException, IOException, SAXException {
