@@ -17,6 +17,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.xml.transform.TransformerException;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -313,10 +315,11 @@ public class ServyLookup extends javax.swing.JFrame {
     }
     
     public void addRowToTable(int month, int day, int year, int hour, int minute, String email, int duration){
-
-        String newMinute = padLeft(String.valueOf(minute), 2).replace(' ', '0');
-        String date = month + "/" + day + "/" + year; //consider using a defined library for this in the future
-        String time = hour + ":" + newMinute;
+        LocalDateTime dateAndTime = LocalDateTime.of(year, month, day, hour, minute);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:ss");
+        String date = dateAndTime.format(dateFormatter);
+        String time = dateAndTime.format(timeFormatter);
         String durationStr = String.valueOf(duration);
         tableModel.addRow(new Object[]{date, time, email, durationStr});
     }
