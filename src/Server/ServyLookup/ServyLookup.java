@@ -115,13 +115,13 @@ public class ServyLookup extends javax.swing.JFrame {
 
         displayTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Date", "Time", "Email", "Duration"
+                "Date", "Time", "Email", "End Time", "Reason"
             }
         ));
         jScrollPane1.setViewportView(displayTable);
@@ -177,9 +177,17 @@ public class ServyLookup extends javax.swing.JFrame {
             for (String data : roomData){
                 if (data != null || data.trim().length() != 0) {
                     String[] dataArray = data.split(" ");
+                    String reason;
                     if (dataArray.length < 7) continue;
+                    if (dataArray.length == 8){
+                        reason = dataArray[7].replace("+", " ");
+                    }
+                    else{
+                        reason = "";
+                    }
                     addRowToTable(Integer.parseInt(dataArray[0]), Integer.parseInt(dataArray[1]),
-                            Integer.parseInt(dataArray[2]), Integer.parseInt(dataArray[3]), Integer.parseInt(dataArray[4]), dataArray[6], Integer.parseInt(dataArray[5]));
+                            Integer.parseInt(dataArray[2]), Integer.parseInt(dataArray[3]), Integer.parseInt(dataArray[4]), dataArray[6],
+                            Integer.parseInt(dataArray[5]), reason);
                 }
             }
         }
@@ -314,14 +322,15 @@ public class ServyLookup extends javax.swing.JFrame {
         roomCB.addItem(name);
     }
     
-    public void addRowToTable(int month, int day, int year, int hour, int minute, String email, int duration){
+    public void addRowToTable(int month, int day, int year, int hour, int minute, String email, int duration, String reason){
         LocalDateTime dateAndTime = LocalDateTime.of(year, month, day, hour, minute);
+        LocalDateTime endTime = dateAndTime.plusMinutes(duration);
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:ss");
         String date = dateAndTime.format(dateFormatter);
         String time = dateAndTime.format(timeFormatter);
-        String durationStr = String.valueOf(duration);
-        tableModel.addRow(new Object[]{date, time, email, durationStr});
+        String durationStr = endTime.format(timeFormatter);
+        tableModel.addRow(new Object[]{date, time, email, durationStr, reason});
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
