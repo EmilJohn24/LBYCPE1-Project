@@ -85,7 +85,7 @@ public class Picker extends javax.swing.JFrame {
         });
         datePicker.setDateTimePermissive(LocalDateTime.now());
         jLabel1.setText("Floor");
-        newDuration.setText("Duration of Reservation");
+        newDuration.setText("End Time");
         duration.setTimeToNow();
         month.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, new java.util.Date(), java.util.Calendar.MINUTE));
         duration.addTimeChangeListener(new TimeChangeListener() {
