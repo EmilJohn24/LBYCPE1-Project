@@ -12,7 +12,7 @@
 			<p>Handles client-side operations</p>
 	<h2>GUI</h2>
 		<h3>Server-side</h3>
-			<img src="screenshots/1.PNG" alt="Server Side" />
+			<img src="screenshots/Update.PNG" alt="Server Side" />
 		<h3>Client-side</h3>
 			<h4>Login</h4>
 				<img src="screenshots/2.PNG" alt="Login />
