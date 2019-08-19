@@ -83,8 +83,8 @@
 			</room>
 			<room height="200" left="1000" name="V210" top="300" width="100">
 			</room>
-			<room height="200" left="0" name="V211" top="300" width="100">
-			</room>
+			<room height="200" left="1100" name="V211" top="300" width="100">
+			8 20 2019 8 0 240 emil_lopez@dlsu.edu.ph Organization+event~~~~</room>
 		</floor>
 		<floor height="500" number="3" width="1000">
 			<room height="200" left="0" name="V301" top="300" width="100">
