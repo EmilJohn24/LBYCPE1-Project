@@ -12,4 +12,4 @@
 			<p>Handles client-side operations</p>
 	<h2>GUI</h2>
 		<h3>Server-side</h3>
-			<img src="screenshots/1.png" alt="Server Side" />
+			<img src="screenshots/1.PNG" alt="Server Side" />
