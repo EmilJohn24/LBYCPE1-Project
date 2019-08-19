@@ -10,3 +10,7 @@
 				<p>Contains classes that are responsible for carrying out client 					requests</p>
 		<h3>Client</h3>
 			<p>Handles client-side operations</p>
+
+	<h2>GUI</h2>
+		<h3>Server-side</h3>
+			<img src="screenshots/1.png" alt="Server Side" />
