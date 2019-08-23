@@ -326,7 +326,7 @@ public class ServyLookup extends javax.swing.JFrame {
         LocalDateTime dateAndTime = LocalDateTime.of(year, month, day, hour, minute);
         LocalDateTime endTime = dateAndTime.plusMinutes(duration);
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:ss");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:ss");
         String date = dateAndTime.format(dateFormatter);
         String time = dateAndTime.format(timeFormatter);
         String durationStr = endTime.format(timeFormatter);

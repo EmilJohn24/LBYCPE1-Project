@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e11c333f-7a24-4967-a1a4-0fdde66529ef" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server/ServyLookup/ServyLookup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/ServyLookup/ServyLookup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/temp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/temp.xml" afterDir="false" />
@@ -25,7 +24,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Client/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
+            <state relative-caret-position="624">
               <caret line="105" selection-start-line="105" selection-end-line="105" />
             </state>
           </provider>
@@ -34,7 +33,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Server/Structures/StructureEditor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
+            <state relative-caret-position="374">
               <caret line="36" column="29" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -46,7 +45,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Client/GraphicClientEndConnector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
+            <state relative-caret-position="1547">
               <caret line="124" column="25" selection-start-line="124" selection-start-column="25" selection-end-line="124" selection-end-column="25" />
             </state>
           </provider>
@@ -55,8 +54,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Client/Graphics/GenericGraphicsWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="38" column="54" lean-forward="true" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="54" />
+            <state relative-caret-position="493">
+              <caret line="38" column="54" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -73,18 +72,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Server/ServyLookup/ServyLookup.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="123" column="50" selection-start-line="123" selection-start-column="50" selection-end-line="123" selection-end-column="50" />
+            <state relative-caret-position="238">
+              <caret line="316" column="42" lean-forward="true" selection-start-line="316" selection-start-column="42" selection-end-line="316" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#9961#10058#0" expanded="true" />
+                <element signature="e#1694#1783#0" expanded="true" />
+                <element signature="e#12831#12832#0" expanded="true" />
                 <element signature="e#12885#12886#0" expanded="true" />
-                <element signature="e#12888#12889#0" expanded="true" />
-                <element signature="e#12928#12929#0" expanded="true" />
-                <element signature="e#12981#12982#0" expanded="true" />
-                <element signature="e#13020#13021#0" expanded="true" />
-                <element signature="e#13067#13068#0" expanded="true" />
-                <element signature="e#13103#13104#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -93,8 +87,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="85" column="41" selection-start-line="85" selection-start-column="41" selection-end-line="85" selection-end-column="41" />
+            <state relative-caret-position="340">
+              <caret line="77" column="18" lean-forward="true" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -181,15 +175,15 @@
         <option value="$PROJECT_DIR$/src/Client/Receipt/DRRMSReceipt.java" />
         <option value="$PROJECT_DIR$/src/Client/GraphicClientEndConnector.java" />
         <option value="$PROJECT_DIR$/src/Client/Picker/Picker.java" />
-        <option value="$PROJECT_DIR$/src/Server/ServyLookup/ServyLookup.java" />
         <option value="$PROJECT_DIR$/test.xml" />
+        <option value="$PROJECT_DIR$/src/Server/ServyLookup/ServyLookup.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="126" />
-    <option name="y" value="345" />
-    <option name="width" value="1658" />
+    <option name="x" value="95" />
+    <option name="y" value="250" />
+    <option name="width" value="1660" />
     <option name="height" value="995" />
   </component>
   <component name="ProjectId" id="1OuhK6JjqXSD7rNbtynZNINpiiT" />
@@ -198,7 +192,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -262,7 +256,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -296,7 +290,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.RoomReservationServer">
+  <component name="RunManager" selected="Application.RoomReservationClient">
     <configuration name="Login" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Login.Login" />
       <module name="LBYCPE1-Project" />
@@ -437,7 +431,7 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16174497" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16644295" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -446,7 +440,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32900432" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2776204" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.29461756" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39935064" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -734,20 +728,27 @@
     <entry file="file://$PROJECT_DIR$/src/Client/Receipt/DRRMSReceipt.java" />
     <entry file="file://$PROJECT_DIR$/src/Client/Picker/Picker.java" />
     <entry file="file://$PROJECT_DIR$/temp.xml" />
-    <entry file="file://$PROJECT_DIR$/src/Client/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="105" selection-start-line="105" selection-end-line="105" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Server/Structures/StructureEditor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
+        <state relative-caret-position="374">
           <caret line="36" column="29" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client/GraphicClientEndConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1547">
+          <caret line="124" column="25" selection-start-line="124" selection-start-column="25" selection-end-line="124" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client/Graphics/GenericGraphicsWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="38" column="54" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -758,42 +759,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/GraphicClientEndConnector.java">
+    <entry file="file://$PROJECT_DIR$/src/Client/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="124" column="25" selection-start-line="124" selection-start-column="25" selection-end-line="124" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Graphics/GenericGraphicsWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="38" column="54" lean-forward="true" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="54" />
+        <state relative-caret-position="624">
+          <caret line="105" selection-start-line="105" selection-end-line="105" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Server/ServyLookup/ServyLookup.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="123" column="50" selection-start-line="123" selection-start-column="50" selection-end-line="123" selection-end-column="50" />
+        <state relative-caret-position="238">
+          <caret line="316" column="42" lean-forward="true" selection-start-line="316" selection-start-column="42" selection-end-line="316" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9961#10058#0" expanded="true" />
+            <element signature="e#1694#1783#0" expanded="true" />
+            <element signature="e#12831#12832#0" expanded="true" />
             <element signature="e#12885#12886#0" expanded="true" />
-            <element signature="e#12888#12889#0" expanded="true" />
-            <element signature="e#12928#12929#0" expanded="true" />
-            <element signature="e#12981#12982#0" expanded="true" />
-            <element signature="e#13020#13021#0" expanded="true" />
-            <element signature="e#13067#13068#0" expanded="true" />
-            <element signature="e#13103#13104#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="85" column="41" selection-start-line="85" selection-start-column="41" selection-end-line="85" selection-end-column="41" />
+        <state relative-caret-position="340">
+          <caret line="77" column="18" lean-forward="true" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
         </state>
       </provider>
     </entry>
